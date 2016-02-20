@@ -1,8 +1,6 @@
 #include "common.hpp"
 #include "vector_t.hpp"
 
-#include <iostream>
-
 using namespace std;
 
 int main(void)

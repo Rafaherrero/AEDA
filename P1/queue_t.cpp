@@ -60,14 +60,15 @@ TDATO queue_t::pop (void){
 
 TDATO& queue_t::back (void) const{
 	if (!empty())
-		return base_[0];
+		return base_[rear_-1];
+		
 	else
 		cerr << "La cola esta vacia" << endl;
 }
 
 TDATO& queue_t::front (void) const{
 	if (!empty())
-		return base_[rear_];
+		return base_[0];
 	else
 		cerr << "La cola esta vacia" << endl;
 }

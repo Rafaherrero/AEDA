@@ -11,6 +11,9 @@ int main(void)
 		A.push(i+2*i);
 	}
 
+	cout << A.front() << endl;
+	cout << A.back() << endl;
+
 	for (int i=0; i < A.size(); i++){
 		cout << A.pop() << endl;
 	}

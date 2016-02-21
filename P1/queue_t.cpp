@@ -25,6 +25,11 @@ void queue_t::build (void){
 	base_= new TDATO[sz_];
 }
 
+void queue_t::build (unsigned int size){
+	base_= new TDATO[size];
+	sz_ = size;
+}
+
 void queue_t::destroy (void){
 	if (base_ != NULL){
 		delete[] base_;
@@ -83,4 +88,35 @@ bool queue_t::empty (void) const{
 
 bool queue_t::full (void) const{
 	return (rear_==sz_);
+}
+
+void queue_t::resize (unsigned int tamano){
+	if (tamano>0){
+		destroy();
+		build (tamano);
+	}
+	else
+		cerr << "Error en el tamano" << endl;
+}
+
+void queue_t::resize_copia (unsigned int tamano){
+	if (tamano>0&&!empty()){
+		queue_t copia(size());
+		for (int i=0; i<size();i++){
+			copia.push(pop());
+		}
+		resize(tamano);
+		if (copia.size()<size()){
+			for (int i=0; i<copia.size();i++)
+				push(copia.pop());
+			copia.destroy();
+		}
+		else{
+			for (int i=0; i<size(); i++)
+				push(copia.pop());
+			copia.destroy();	
+		}
+	}
+	else
+		cerr << "Error en el tamano" << endl;
 }

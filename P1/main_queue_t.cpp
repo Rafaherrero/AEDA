@@ -65,7 +65,7 @@ int main(void)
 	}
 
 	for (int i=0; i < C.size(); i++){
-		C.push(i+4*i);
+		C.push(i+3*i);
 	}
 
 	C.resize_copia(10);
@@ -79,7 +79,7 @@ int main(void)
 	cout << "Cola C tras introducir los 10 elementos de su tamano: " << C.size() << endl;
 
 	for (int i=0; i < C.size(); i++){
-		C.push(i+4*i);
+		C.push(i+3*i);
 	}
 	
 	for (int i=0; i < C.size(); i++){

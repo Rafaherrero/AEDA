@@ -1,4 +1,4 @@
-#include "common.hpp"
+#include "../common.hpp"
 
 class vector_t
 {

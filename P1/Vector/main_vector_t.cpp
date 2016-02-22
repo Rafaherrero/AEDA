@@ -1,4 +1,4 @@
-#include "common.hpp"
+#include "../common.hpp"
 #include "vector_t.hpp"
 
 using namespace std;

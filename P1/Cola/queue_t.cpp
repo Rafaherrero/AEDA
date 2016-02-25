@@ -14,15 +14,11 @@ base_(NULL),
 rear_(0),
 sz_(size)
 {
-	build();
+	build(size);
 }
 
 queue_t::~queue_t(void){
 	destroy();
-}
-
-void queue_t::build (void){
-	base_= new TDATO[sz_];
 }
 
 void queue_t::build (unsigned int size){

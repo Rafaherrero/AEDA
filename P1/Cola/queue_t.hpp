@@ -10,7 +10,6 @@ public:
 	queue_t(void);
 	~queue_t(void);
 	queue_t(unsigned int size);
-	void build(void);
 	void build (unsigned int size);
 	void destroy(void);
 	void push(TDATO dato);

@@ -1,3 +1,5 @@
+#include "../common.hpp"
+
 class dll_node_t
 {
 	private:
@@ -9,10 +11,10 @@ class dll_node_t
 		dll_node_t(void);
 		dll_node_t(TDATO dato);
 		~dll_node_t(void);
-		dll_node_t* get_next(void);
+		dll_node_t* get_next(void) const;
 		TDATO get_dato(void);
 		void set_next(dll_node_t* next);
 		void set_dato(TDATO dato);
-		dll_node_t* get_prev(void);
+		dll_node_t* get_prev(void) const;
 		void set_prev(dll_node_t* prev);
 };

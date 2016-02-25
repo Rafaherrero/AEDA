@@ -25,6 +25,7 @@ void dlinkedlist_t::insert_beginning(dll_node_t* n){
 		end_ = n;
 
 	beginning_ = n;
+	sz_++;
 }
 
 dll_node_t* dlinkedlist_t::extract_beginning(void){
@@ -38,6 +39,7 @@ dll_node_t* dlinkedlist_t::extract_beginning(void){
 		end_ = NULL;
 
 	aux-> set_next(NULL);
+	sz_--;
 	return aux;
 }
 
@@ -51,6 +53,7 @@ void dlinkedlist_t::insert_end(dll_node_t* n){
 		beginning_ = n;
 
 	end_ = n;
+	sz_++;
 }
 
 dll_node_t* dlinkedlist_t::extract_end(void){
@@ -64,11 +67,16 @@ dll_node_t* dlinkedlist_t::extract_end(void){
 		beginning_ = NULL;
 
 	aux -> set_prev(NULL);
+	sz_--;
 	return aux;
 }
 
 bool dlinkedlist_t::empty(void) const{
 	return (beginning_==NULL);
+}
+
+unsigned int dlinkedlist_t::size(void) const{
+	return sz_;
 }
 
 ostream& dlinkedlist_t::write(ostream& os) const{
@@ -80,5 +88,4 @@ ostream& dlinkedlist_t::write(ostream& os) const{
 	}
 
 	return os;
-}
 }

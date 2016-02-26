@@ -1,3 +1,5 @@
+#include "../common.hpp"
+
 class node_t
 {
 	private:

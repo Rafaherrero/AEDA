@@ -30,13 +30,4 @@ int main(void)
 	for (int i=0;i<A.size();i++){
 		A.push(i+2*i);
 	}
-
-	cout << "Volvemos a meter los elementos y cambiamos la pila a un tamaño 10." << endl;
-
-	A.resize_copia(10);
-
-	for (int i=0;i<A.size();i++){
-		cout << A.pop() << endl;
-	}
-
 }

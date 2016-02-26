@@ -41,7 +41,10 @@ void queue_t::push (TDATO dato){
 		rear_++;
 	}
 	else{
-		cerr << "La cola esta llena" << endl;
+		sz_++;
+		resize_copia(sz_);
+		base_[rear_] = dato;
+		rear_++;
 	}
 }
 

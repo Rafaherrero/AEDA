@@ -41,7 +41,6 @@ node_t* linkedlist_t::extraer_after (node_t* prev){
 	aux -> set_next(NULL);
 	sz_--;
 	return aux;
-
 }
 
 unsigned int linkedlist_t::size(void){

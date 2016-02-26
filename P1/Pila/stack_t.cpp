@@ -41,7 +41,10 @@ void stack_t::push (TDATO dato){
 		top_++;
 	}
 	else{
-		cerr << "La pila esta llena" << endl;
+		sz_++;
+		resize_copia(sz_);
+		base_[top_] = dato;
+		top_++;
 	}
 }
 

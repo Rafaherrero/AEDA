@@ -2,7 +2,8 @@
 
 dlinkedlist_t::dlinkedlist_t (void):
 beginning_ (NULL),
-end_ (NULL) 
+end_ (NULL) ,
+sz_ (0)
 {}
 
 dlinkedlist_t::~dlinkedlist_t(void){
@@ -88,4 +89,22 @@ ostream& dlinkedlist_t::write(ostream& os) const{
 	}
 
 	return os;
+}
+
+void dlinkedlist_t::insert_pos(dll_node_t* n, unsigned int pos){
+	if (pos>sz_+1){
+		cerr << "Hay un problema con el tamaño." << endl;
+	}
+	else{
+		dll_node_t* aux = beginning_;
+		for (int i=1;i<pos;i++){
+			aux = aux->get_next();
+		}
+		n->set_prev(aux->get_prev());
+		n->set_next(aux->get_next());
+		dll_node_t* copia = aux->get_prev();
+		copia->set_next(n);
+		dll_node_t* copia_2 = aux->get_next();
+		copia_2->set_prev(n);
+	}
 }

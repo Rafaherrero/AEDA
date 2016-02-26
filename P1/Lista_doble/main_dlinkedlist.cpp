@@ -13,9 +13,16 @@ int main(void)
 		A.insert_end(&nodo[i]);
 	}
 
+	dll_node_t nodo_nuevo(150);
+
+	A.insert_pos(&nodo_nuevo,6);
 	unsigned int tamano_lista = A.size();
 	for (int i=0;i<tamano_lista;i++){
 		dll_node_t* nodo=A.extract_end();
 		cout << nodo->get_dato() << endl;
 	}
+
+	
+
+
 }

@@ -25,4 +25,6 @@ public:
 
 	unsigned int size(void) const;
 
+	void insert_pos(dll_node_t* n, unsigned int pos);
+
 };

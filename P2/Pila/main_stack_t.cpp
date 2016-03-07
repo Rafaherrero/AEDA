@@ -8,7 +8,7 @@ int main(void)
 	stack_t<int> A(10);
 
 	for (int i=0;i<A.size();i++){
-		A.push(i+2*i);
+		A.push(-(i+2*i));
 	}
 
 	cout << "Elemento primero de la pila A: " << A.top() << endl;

@@ -1,14 +1,16 @@
 #include "stack_t.hpp"
+#include "../Racional/racional.hpp"
 
 using namespace std;
 
 int main(void)
 {
 
-	stack_t<int> A(10);
+	stack_t<racional> A(10);
+	racional B(34,2);
 
 	for (int i=0;i<A.size();i++){
-		A.push(-(i+2*i));
+		A.push(B);
 	}
 
 	cout << "Elemento primero de la pila A: " << A.top() << endl;
@@ -28,6 +30,6 @@ int main(void)
 	cout << "Elementos de la pila A: " << A.size() << endl;
 
 	for (int i=0;i<A.size();i++){
-		A.push(i+2*i);
+		A.push(B);
 	}
 }

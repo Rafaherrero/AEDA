@@ -9,17 +9,28 @@ using namespace std;
 
 template<class TDATO> 
 TDATO calculadora(istream& expresion){
-	stack_t<TDATO> A(1);
+	stack_t<TDATO> pila(1);
 	TDATO caracter;
+	TDATO caracter_2;
 	while (expresion.peek()!=-1){
 		if (expresion.peek()>=48&&expresion.peek()<=57){
 			expresion >> caracter;
-			A.push(caracter);
+			pila.push(caracter);
 		}
-		else
-			expresion.ignore();
+		else{
+			if (expresion.peek()==32||(expresion.peek()!=42&&expresion.peek()!=43&&expresion.peek()!=45&&expresion.peek()!=47)){
+				expresion.ignore();
+			}
+			else{
+				if (expresion.peek()==42){
+					caracter_2 = pila.pop();
+					caracter = caracter_2+pila.pop();
+					pila.push(caracter);
+				}
+			}
+		}
 	}
-	cout << A.pop() << endl;
+	return pila.pop();
 }
 
 int main (void){
@@ -38,37 +49,37 @@ int main (void){
 
 	switch (seleccion){
 		case '0':
-			cout << endl << "Ha seleccionado la opción de enteros." << endl;
-			cout << "Inserte su expresion: ";
-			cin.ignore(); getline(cin, expr_2);
-			expr << expr_2;
-			calculadora<int> (expr);
-			break;
+		cout << endl << "Ha seleccionado la opción de enteros." << endl;
+		cout << "Inserte su expresion: ";
+		cin.ignore(); getline(cin, expr_2);
+		expr << expr_2;
+		cout << "La solucion a su expresion es: " << calculadora<int>(expr) << endl;
+		break;
 		case '1':
 		cout << endl << "Ha seleccionado la opción de reales." << endl;
-			cout << "Inserte su expresion: ";
-			cin.ignore(); getline(cin, expr_2);
-			expr << expr_2;
-			calculadora<float> (expr);
-			break;
+		cout << "Inserte su expresion: ";
+		cin.ignore(); getline(cin, expr_2);
+		expr << expr_2;
+		calculadora<float> (expr);
+		break;
 		case '2':
 		cout << endl << "Ha seleccionado la opción de racionales." << endl;
-			cout << "Inserte su expresion: ";
-			cin.ignore(); getline(cin, expr_2);
-			expr << expr_2;
-			calculadora<racional> (expr);
-			break;
+		cout << "Inserte su expresion: ";
+		cin.ignore(); getline(cin, expr_2);
+		expr << expr_2;
+		calculadora<racional> (expr);
+		break;
 		case '3':
 		cout << endl << "Ha seleccionado la opción de complejos." << endl;
-			cout << "Inserte su expresion: ";
-			cin.ignore(); getline(cin, expr_2);
-			expr << expr_2;
-			calculadora<complejo> (expr);
-			break;
+		cout << "Inserte su expresion: ";
+		cin.ignore(); getline(cin, expr_2);
+		expr << expr_2;
+		calculadora<complejo> (expr);
+		break;
 		default:
-			cout << endl << "Ha introducido una opción errónea" << endl;
-			break;
-		}
-		
+		cout << endl << "Ha introducido una opción errónea" << endl;
+		break;
+	}
+	
 }
 

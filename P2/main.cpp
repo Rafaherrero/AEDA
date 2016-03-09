@@ -18,14 +18,33 @@ TDATO calculadora(istream& expresion){
 			pila.push(caracter);
 		}
 		else{
-			if (expresion.peek()==32||(expresion.peek()!=42&&expresion.peek()!=43&&expresion.peek()!=45&&expresion.peek()!=47)){
+			if (expresion.peek()==32&&(expresion.peek()!=42&&expresion.peek()!=43&&expresion.peek()!=45&&expresion.peek()!=47)){
 				expresion.ignore();
 			}
 			else{
 				if (expresion.peek()==42){
 					caracter_2 = pila.pop();
-					caracter = caracter_2+pila.pop();
+					caracter = pila.pop()*caracter_2;
 					pila.push(caracter);
+					expresion.ignore();
+				}
+				if (expresion.peek()==43){
+					caracter_2 = pila.pop();
+					caracter = pila.pop()+caracter_2;
+					pila.push(caracter);
+					expresion.ignore();
+				}
+				if (expresion.peek()==45){
+					caracter_2 = pila.pop();
+					caracter = pila.pop()-caracter_2;
+					pila.push(caracter);
+					expresion.ignore();
+				}
+				if (expresion.peek()==47){
+					caracter_2 = pila.pop();
+					caracter = pila.pop()/caracter_2;
+					pila.push(caracter);
+					expresion.ignore();
 				}
 			}
 		}
@@ -60,26 +79,26 @@ int main (void){
 		cout << "Inserte su expresion: ";
 		cin.ignore(); getline(cin, expr_2);
 		expr << expr_2;
-		calculadora<float> (expr);
+		cout << "La solucion a su expresion es: " << calculadora<float>(expr) << endl;
 		break;
 		case '2':
 		cout << endl << "Ha seleccionado la opción de racionales." << endl;
 		cout << "Inserte su expresion: ";
 		cin.ignore(); getline(cin, expr_2);
 		expr << expr_2;
-		calculadora<racional> (expr);
+		cout << "La solucion a su expresion es: " << calculadora<racional>(expr) << endl;
 		break;
 		case '3':
 		cout << endl << "Ha seleccionado la opción de complejos." << endl;
 		cout << "Inserte su expresion: ";
 		cin.ignore(); getline(cin, expr_2);
 		expr << expr_2;
-		calculadora<complejo> (expr);
+		cout << "La solucion a su expresion es: " << calculadora<complejo>(expr) << endl;
 		break;
 		default:
 		cout << endl << "Ha introducido una opción errónea" << endl;
 		break;
 	}
-	
+
 }
 

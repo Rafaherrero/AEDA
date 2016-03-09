@@ -128,17 +128,17 @@ template<class TDATO>
 void stack_t<TDATO>::resize_copia (unsigned int tamano){
 	if (tamano>0&&!empty()){
 		stack_t copia(size());
-		for (int i=0; i<size();i++){
+		for (int i=0; i<size()-1;i++){
 			copia.push(pop());
 		}
 		resize(tamano);
 		if (copia.size()<size()){
-			for (int i=0; i<copia.size();i++)
+			for (int i=0; i<copia.size()-1;i++)
 				push(copia.pop());
 			copia.destroy();
 		}
 		else{
-			for (int i=0; i<size(); i++)
+			for (int i=0; i<size()-1; i++)
 				push(copia.pop());
 			copia.destroy();	
 		}

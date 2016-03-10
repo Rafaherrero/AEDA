@@ -49,7 +49,7 @@ TDATO calculadora(istream& expresion){
 			}
 		}
 	}
-	return pila.pop();
+	return pila.pop();	
 }
 
 int main (void){

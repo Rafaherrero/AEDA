@@ -8,5 +8,6 @@ int main(void)
 	cout << "Este es A: " << A << endl;
 	racional B(34,12);
 	cout << "Este es B: " << B << endl;
-	cout << "Esta es la suma de A+B: " << A+B << endl;
+	cout << "Esta es la suma de A y B: " << A+B << endl;
+	cout << "Esta es la multiplicacion de A y B: " << A*B << endl;
 }

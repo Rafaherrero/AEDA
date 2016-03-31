@@ -1,8 +1,10 @@
+#pragma once
 #include <iostream>
 #include <cstdlib>
 #include <unistd.h>
+#include "../numero_t.hpp"
 
-class racional
+class racional: public numero_t
 {
 public:
 	int numerador_;
@@ -24,6 +26,9 @@ public:
 
 	friend std::ostream& operator<<(std::ostream& os, const racional& num);
 	friend std::istream& operator>>(std::istream& is, racional& num);
+
+	ostream& toStream(ostream& os) const;
+    istream& fromStream(istream& is);
 
 	racional operator+(const racional& num) const;
 	racional operator-(const racional& num) const;

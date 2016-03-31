@@ -49,6 +49,18 @@ void racional::set_denominador(int denominador)
 int racional::get_numerador(void){return numerador_;}
 int racional::get_denominador(void){return denominador_;}
 
+ostream& racional::toStream(ostream& os) const
+{
+    os << numerador_ << "/" << denominador_;
+    return os;
+}
+
+istream& racional::fromStream(istream& is)
+{
+    is >> numerador_ >> denominador_;
+    return is;
+}
+
 std::ostream& operator<<(std::ostream& os, const racional& num){ os << num.numerador_ << "/" << num.denominador_; return os;}
 std::istream& operator>>(std::istream& is, racional& num){ is >> num.numerador_ >> num.denominador_; return is;}
 

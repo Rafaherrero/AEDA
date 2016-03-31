@@ -1,7 +1,9 @@
 #include <iostream>
+#include <iomanip>
 #include <cstdlib>
+#include "../numero_t.hpp"
 
-class complejo
+class complejo: public numero_t
 {
 private:
 	long double real_;
@@ -20,6 +22,9 @@ public:
 	
 	friend std::ostream& operator<<(std::ostream& os, const complejo& num);
 	friend std::istream& operator>>(std::istream& is, complejo& num);
+
+	ostream& toStream(ostream& os) const;
+    istream& fromStream(istream& is);
 
 	complejo operator+(const complejo& num) const;
 	complejo operator-(const complejo& num) const;

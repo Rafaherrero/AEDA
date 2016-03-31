@@ -22,10 +22,24 @@ long double complejo::get_imag(void){return imag_;}
 std::ostream& operator<<(std::ostream& os, const complejo& num)
 {
 	if(num.imag_>=0){os << num.real_ << " + " << num.imag_ << "i"; return os;}
-	os << num.real_ << " - " << num.imag_ << "i"; return os;
+ 	os << num.real_ << " - " << num.imag_ << "i"; return os;
 }
 std::istream& operator>>(std::istream& is, complejo& num){	is >> num.real_ >> num.imag_; return is;}
 
+ostream& complejo::toStream(ostream& os) const
+{
+    if(imag_>=0)
+        os << real_ << " + " << imag_ << "i";
+    else
+	    os << real_ << " - " << imag_ << "i";
+	return os;
+}
+
+istream& complejo::fromStream(istream& is)
+{
+    is >> real_ >> imag_;
+    return is;
+}
 
 complejo complejo::operator+(const complejo& num) const
 {

@@ -73,3 +73,19 @@ istream& operator>>(istream& is, real& rel)
     rel.fromStream(is);
     return is;
 }
+
+const entero real::toEntero() const{
+	//throw exception::error_precision("Error en la precision");
+    return entero(int(number_));
+}
+const racional real::toRacional() const{
+	//throw exception::error_precision("Error en la precision");
+    return racional(int(number_));
+}
+const real real::toReal() const{
+    return real(number_);
+}
+const complejo real::toComplejo() const{
+	//throw exception::error_precision("Error en la precision");
+    return complejo(number_,1);
+}

@@ -11,7 +11,7 @@ denominador_(1)
 	set_numerador(numerador);
 }
 
-racional::racional(long long int numerador, long long int denominador):
+racional::racional(long long int numerador, long long int denominador)
 {
 	set_numerador(numerador);
 	
@@ -39,12 +39,10 @@ int racional::abs(int num)
 
 void racional::set_numerador(long long int numerador)
 {
-	if(denominador < INT_MIN_VAL)
+	if(numerador < INT_MIN_VAL)
         throw exception::underflow_error("Exceeded 'INT_MIN_VAL'");
-    if(denominador > INT_MAX_VAL)
+    if(numerador > INT_MAX_VAL)
         throw exception::overflow_error("Exceeded 'INT_MAX_VAL'");
-    if(denominador == 0)
-        throw exception::out_of_range("0 in denominator");
 	numerador_ = numerador;
 	simplify();
 }
@@ -103,4 +101,19 @@ racional racional::operator/(const racional& num) const
 	racional aux(numerador_*num.denominador_, denominador_*num.numerador_);
 	aux.simplify();
 	return aux;
+}
+
+const entero racional::toEntero() const{
+	//throw exception::error_precision("Error en la precision");
+    return entero(int(numerador_/denominador_));
+}
+const racional racional::toRacional() const{
+    return racional(numerador_,denominador_);
+}
+const real racional::toReal() const{
+    return real(double(numerador_/denominador_));
+}
+const complejo racional::toComplejo() const{
+	//throw exception::error_precision("Error en la precision");
+    return complejo((numerador_/denominador_),1);
 }

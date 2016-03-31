@@ -2,6 +2,9 @@
 #include <iostream>
 #include <cstdlib>
 #include <unistd.h>
+#include "../Complejo/complejo.hpp"
+#include "../Entero/entero.hpp"
+#include "../Real/real.hpp"
 #include "../numero_t.hpp"
 #include "../excepciones.hpp"
 
@@ -38,4 +41,9 @@ public:
 	racional operator-(const racional& num) const;
 	racional operator*(const racional& num) const;
 	racional operator/(const racional& num) const;
+
+	const entero toEntero() const;
+    const racional toRacional() const;
+    const real toReal() const;
+    const complejo toComplejo() const;
 };

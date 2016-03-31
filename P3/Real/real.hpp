@@ -3,6 +3,9 @@
 #include <ostream>
 #include <cstdlib>
 #include <unistd.h>
+#include "../Complejo/complejo.hpp"
+#include "../Entero/entero.hpp"
+#include "../Racional/racional.hpp"
 #include "../numero_t.hpp"
 #include "../excepciones.hpp"
 
@@ -25,6 +28,11 @@ public:
     real operator-(const real& rel) const;
     real operator*(const real& rel) const;
     real operator/(const real& rel) const;
+
+    const entero toEntero() const;
+    const racional toRacional() const;
+    const real toReal() const;
+    const complejo toComplejo() const;
 
     friend ostream& operator<<(ostream& os, const real& rel);
     friend istream& operator>>(istream& is, real& rel);

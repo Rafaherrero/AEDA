@@ -3,6 +3,9 @@
 #include <ostream>
 #include <iomanip>
 #include <cstdlib>
+#include "../Entero/entero.hpp"
+#include "../Real/real.hpp"
+#include "../Racional/racional.hpp"
 #include "../numero_t.hpp"
 #include "../excepciones.hpp"
 
@@ -38,5 +41,10 @@ public:
 	complejo operator-(const complejo& num) const;
 	complejo operator*(const complejo& num) const;
 	complejo operator/(const complejo& num) const;
+
+	const entero toEntero() const;
+    const racional toRacional() const;
+    const real toReal() const;
+    const complejo toComplejo() const;
 
 };

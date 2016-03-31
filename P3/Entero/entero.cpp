@@ -73,3 +73,17 @@ istream& operator>>(istream& is, entero& intg)
     is >> intg.number_;
     return is;
 }
+
+const entero entero::toEntero() const{
+    return entero(number_);
+}
+const racional entero::toRacional() const{
+    return racional(number_);
+}
+const real entero::toReal() const{
+    return real(number_);
+}
+const complejo entero::toComplejo() const{
+    cout << endl << "Precision error" << endl;
+    return complejo(number_,1);
+}

@@ -7,6 +7,7 @@ namespace exception{
     class length_error;
     class overflow_error;
     class underflow_error;
+    class error_precision;
 }
 
 class exception::mem_error:public std::exception
@@ -65,6 +66,18 @@ class exception::underflow_error:public std::exception
     public:
     underflow_error(void): what_("Underflow error"){}
     underflow_error(const char* what_arg): what_(what_arg){}
+    
+    const char* what() const throw(){return what_;}
+};
+
+class exception::error_precision:public std::exception
+{
+    private:
+    const char* what_;
+    
+    public:
+    error_precision(void): what_("Error de precision"){}
+    error_precision(const char* what_arg): what_(what_arg){}
     
     const char* what() const throw(){return what_;}
 };

@@ -83,3 +83,19 @@ complejo complejo::operator/(const complejo& num) const
 {
 	return complejo( ( (real_ * num.real_) - (imag_ * num.imag_) )/( num.real_*num.real_ + num.imag_*num.imag_ ), ( (imag_ * num.real_) + (real_ * num.imag_) )/( num.real_*num.real_ + num.imag_*num.imag_ ) );
 }
+
+const entero complejo::toEntero() const{
+	//throw exception::error_precision("Error en la precision");
+    return entero(int(real_));
+}
+const racional complejo::toRacional() const{
+	//throw exception::error_precision("Error en la precision");
+    return racional(int(real_));
+}
+const real complejo::toReal() const{
+	//throw exception::error_precision("Error en la precision");
+    return real(double(real_));
+}
+const complejo complejo::toComplejo() const{
+    return complejo(real_,imag_);
+}

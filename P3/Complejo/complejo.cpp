@@ -5,19 +5,42 @@ real_(0),
 imag_(0){}
 
 complejo::complejo(long double num):
-real_(num),
-imag_(0){}
+imag_(0)
+{
+	set_real(num);
+}
 
-complejo::complejo(long double real, long double imag):
-real_(real),
-imag_(imag){}
+complejo::complejo(long double real, long double imag)
+{
+	set_real(real);
+    set_imag(imag);
+}
 
 complejo::~complejo(void){}
 
-void complejo::set_real(long double real){real_ = real;}
-void complejo::set_imag(long double imag){imag_ = imag;}
-long double complejo::get_real(void){return real_;}
-long double complejo::get_imag(void){return imag_;}
+void complejo::set_real(long double real){
+	if(real < DOUBLE_MIN_VAL)
+        throw exception::underflow_error("Exceeded 'DOUBLE_MIN_VAL'");
+    if(real > DOUBLE_MAX_VAL)
+        throw exception::overflow_error("Exceeded 'DOUBLE_MAX_VAL'");
+    real_ = real;
+}
+
+void complejo::set_imag(long double imag){
+	if(imag < DOUBLE_MIN_VAL)
+        throw exception::underflow_error("Exceeded 'DOUBLE_MIN_VAL'");
+    if(imag > DOUBLE_MAX_VAL)
+        throw exception::overflow_error("Exceeded 'DOUBLE_MAX_VAL'");
+    imag_ = imag;
+}
+
+long double complejo::get_real(void){
+	return real_;
+}
+
+long double complejo::get_imag(void){
+	return imag_;
+}
 
 std::ostream& operator<<(std::ostream& os, const complejo& num)
 {
@@ -58,5 +81,5 @@ complejo complejo::operator*(const complejo& num) const
 
 complejo complejo::operator/(const complejo& num) const
 {
-	complejo aux( ( (real_ * num.real_) - (imag_ * num.imag_) )/( num.real_*num.real_ + num.imag_*num.imag_ ), ( (imag_ * num.real_) + (real_ * num.imag_) )/( num.real_*num.real_ + num.imag_*num.imag_ ) );
+	return complejo( ( (real_ * num.real_) - (imag_ * num.imag_) )/( num.real_*num.real_ + num.imag_*num.imag_ ), ( (imag_ * num.real_) + (real_ * num.imag_) )/( num.real_*num.real_ + num.imag_*num.imag_ ) );
 }

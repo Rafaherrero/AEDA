@@ -8,27 +8,13 @@ racional::racional(long long int numerador):
 numerador_(0),
 denominador_(1)
 {
-	if(numerador < INT_MIN_VAL)
-        throw exception::underflow_error("Exceeded 'INT_MIN_VAL'");
-    if(numerador > INT_MAX_VAL)
-        throw exception::overflow_error("Exceeded 'INT_MAX_VAL'");
+	set_numerador(numerador);
 }
 
 racional::racional(long long int numerador, long long int denominador):
-numerador_(0)
 {
-	if(numerador < INT_MIN_VAL)
-        throw exception::underflow_error("Exceeded 'INT_MIN_VAL'");
-    if(numerador > INT_MAX_VAL)
-        throw exception::overflow_error("Exceeded 'INT_MAX_VAL'");
-    numerador_ = numerador;
+	set_numerador(numerador);
 	
-	if(denominador < INT_MIN_VAL)
-        throw exception::underflow_error("Exceeded 'INT_MIN_VAL'");
-    if(denominador > INT_MAX_VAL)
-        throw exception::overflow_error("Exceeded 'INT_MAX_VAL'");
-    if(denominador == 0)
-        throw exception::out_of_range("0 in denominator");
 	set_denominador(denominador);
 }
 
@@ -51,17 +37,19 @@ int racional::abs(int num)
 	return num;
 }
 
-void racional::set_numerador(long int numerador)
+void racional::set_numerador(long long int numerador)
 {
-	if(numerador < INT_MIN_VAL)
+	if(denominador < INT_MIN_VAL)
         throw exception::underflow_error("Exceeded 'INT_MIN_VAL'");
-    if(numerador > INT_MAX_VAL)
+    if(denominador > INT_MAX_VAL)
         throw exception::overflow_error("Exceeded 'INT_MAX_VAL'");
+    if(denominador == 0)
+        throw exception::out_of_range("0 in denominator");
 	numerador_ = numerador;
 	simplify();
 }
 
-void racional::set_denominador(long int denominador)
+void racional::set_denominador(long long int denominador)
 {
 	if(denominador == 0)
         throw exception::out_of_range("0 in denominator");

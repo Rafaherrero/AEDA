@@ -4,6 +4,10 @@
 #include <iomanip>
 #include <cstdlib>
 #include "../numero_t.hpp"
+#include "../excepciones.hpp"
+
+#define DOUBLE_MIN_VAL -1.0e308
+#define DOUBLE_MAX_VAL 1.0e308
 
 using namespace std;
 

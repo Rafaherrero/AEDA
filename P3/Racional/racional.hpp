@@ -23,13 +23,13 @@ public:
 	void simplify(void);
 	int abs(int num);
 
-	void set_numerador(long int numerador);
-	void set_denominador(long int denominador);
+	void set_numerador(long long int numerador);
+	void set_denominador(long long int denominador);
 	long int get_numerador(void);
 	long int get_denominador(void);
 
-	friend std::ostream& operator<<(std::ostream& os, const racional& num);
-	friend std::istream& operator>>(std::istream& is, racional& num);
+	friend ostream& operator<<(ostream& os, const racional& num);
+	friend istream& operator>>(istream& is, racional& num);
 
 	ostream& toStream(ostream& os) const;
     istream& fromStream(istream& is);

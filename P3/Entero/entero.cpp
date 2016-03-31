@@ -46,7 +46,7 @@ entero entero::operator*(const entero& intg) const
 entero entero::operator/(const entero& intg) const
 {
     if(intg.number_ == 0)
-        throw exception::overflow_error("Divide by zero in operator '/'");
+        throw exception::out_of_range("0 in denominator");
     return number_ / intg.number_;
 }
 

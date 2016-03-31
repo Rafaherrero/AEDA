@@ -9,5 +9,4 @@ int main (void){
 	cout << "Numero B: " << B << endl;
 	cout << "Suma de A y B: " << A+B << endl;
 	cout << "Multiplicacion de A y B: " << A*B << endl;
-
 }

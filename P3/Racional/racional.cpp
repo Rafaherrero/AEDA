@@ -4,13 +4,31 @@ racional::racional(void):
 numerador_(0),
 denominador_(1){}
 
-racional::racional(int numerador):
-numerador_(numerador),
-denominador_(1){}
-
-racional::racional(int numerador, int denominador):
-numerador_(numerador)
+racional::racional(long long int numerador):
+numerador_(0),
+denominador_(1)
 {
+	if(numerador < INT_MIN_VAL)
+        throw exception::underflow_error("Exceeded 'INT_MIN_VAL'");
+    if(numerador > INT_MAX_VAL)
+        throw exception::overflow_error("Exceeded 'INT_MAX_VAL'");
+}
+
+racional::racional(long long int numerador, long long int denominador):
+numerador_(0)
+{
+	if(numerador < INT_MIN_VAL)
+        throw exception::underflow_error("Exceeded 'INT_MIN_VAL'");
+    if(numerador > INT_MAX_VAL)
+        throw exception::overflow_error("Exceeded 'INT_MAX_VAL'");
+    numerador_ = numerador;
+	
+	if(denominador < INT_MIN_VAL)
+        throw exception::underflow_error("Exceeded 'INT_MIN_VAL'");
+    if(denominador > INT_MAX_VAL)
+        throw exception::overflow_error("Exceeded 'INT_MAX_VAL'");
+    if(denominador == 0)
+        throw exception::out_of_range("0 in denominator");
 	set_denominador(denominador);
 }
 
@@ -33,21 +51,26 @@ int racional::abs(int num)
 	return num;
 }
 
-void racional::set_numerador(int numerador)
+void racional::set_numerador(long int numerador)
 {
+	if(numerador < INT_MIN_VAL)
+        throw exception::underflow_error("Exceeded 'INT_MIN_VAL'");
+    if(numerador > INT_MAX_VAL)
+        throw exception::overflow_error("Exceeded 'INT_MAX_VAL'");
 	numerador_ = numerador;
 	simplify();
 }
 
-void racional::set_denominador(int denominador)
+void racional::set_denominador(long int denominador)
 {
-	if(denominador == 0) exit(1);
-	else denominador_ = denominador;
+	if(denominador == 0)
+        throw exception::out_of_range("0 in denominator");
+	denominador_ = denominador;
 	simplify();
 }
 
-int racional::get_numerador(void){return numerador_;}
-int racional::get_denominador(void){return denominador_;}
+long int racional::get_numerador(void){return numerador_;}
+long int racional::get_denominador(void){return denominador_;}
 
 ostream& racional::toStream(ostream& os) const
 {

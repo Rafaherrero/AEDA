@@ -7,7 +7,7 @@ using namespace std;
 
 int main(void)
 {
-	numero_t* p1 = new racional(32/2);
+	numero_t* p1 = new racional(32,2);
 	cout << "Mi racional es: " << *p1 << endl;
 	numero_t* p2 = new complejo(12,5);
 	cout << "Mi complejo es: " << *p2 << endl;

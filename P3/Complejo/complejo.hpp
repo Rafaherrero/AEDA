@@ -1,8 +1,11 @@
 #pragma once
 #include <iostream>
+#include <ostream>
 #include <iomanip>
 #include <cstdlib>
 #include "../numero_t.hpp"
+
+using namespace std;
 
 class complejo: public numero_t
 {
@@ -21,8 +24,8 @@ public:
 	long double get_real(void);
 	long double get_imag(void);
 	
-	friend std::ostream& operator<<(std::ostream& os, const complejo& num);
-	friend std::istream& operator>>(std::istream& is, complejo& num);
+	friend ostream& operator<<(ostream& os, const complejo& num);
+	friend istream& operator>>(istream& is, complejo& num);
 
 	ostream& toStream(ostream& os) const;
     istream& fromStream(istream& is);

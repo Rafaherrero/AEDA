@@ -1,3 +1,5 @@
+//Compilar con: g++ -std=c++11 main_stack_t.cpp ../Entero/entero.cpp ../Complejo/complejo.cpp ../Racional/racional.cpp ../Real/real.cpp
+
 #include "../numero_t.hpp"
 #include "../Racional/racional.hpp"
 #include "../Complejo/complejo.hpp"

@@ -2,6 +2,7 @@
 #include "Racional/racional.hpp"
 #include "Complejo/complejo.hpp"
 #include "Entero/entero.hpp"
+#include "Real/real.hpp"
 #include "excepciones.hpp"
 
 using namespace std;

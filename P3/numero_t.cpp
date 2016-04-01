@@ -14,3 +14,15 @@ istream& operator>>(istream& is, numero_t& num)
     return is;
 }
 
+numero_t* numero_t::operator+(const numero_t& num) const{
+
+}
+numero_t* numero_t::operator-(const numero_t& num) const{
+
+}
+numero_t* numero_t::operator*(const numero_t& num) const{
+
+}
+numero_t* numero_t::operator/(const numero_t& num) const{
+
+}

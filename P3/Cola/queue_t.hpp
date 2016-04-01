@@ -108,7 +108,7 @@ void queue_t<T>::resize(unsigned int new_sz)
 template<class T>
 unsigned int queue_t<T>::size(void) const
 {
-	return msz_;
+	return sz_;
 }
 
 template<class T>

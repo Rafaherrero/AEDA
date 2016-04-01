@@ -12,7 +12,7 @@ using namespace std;
 
 int main(void)
 {
-	queue_t<entero> A(0);
+	queue_t<entero> A(10);
 
 	for (int i=0; i < A.size(); i++){
 		A.push(i+2*i);

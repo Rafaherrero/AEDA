@@ -32,4 +32,5 @@ int main(void)
 	}
 	p4 = new racional(p2 -> toRacional());
 	cout << "Ahora mi entero es un racional y vale: " << *p4 << endl;
+
 }

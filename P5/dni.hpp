@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cstdlib>
+#include <time.h>
 #pragma once
 
 using namespace std;
@@ -13,4 +14,8 @@ public:
 	~dni(void);
 	unsigned long int get_dni(void);
 	void set_dni(unsigned long int dni_entrada);
+	bool operator<(dni& dni_cp);
+	bool operator>(dni& dni_cp);
+	bool operator<=(dni& dni_cp);
+	bool operator>=(dni& dni_cp);
 };

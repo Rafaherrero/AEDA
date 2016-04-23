@@ -4,7 +4,21 @@
 using namespace std;
 
 template<class tipo_vector>
-void insercion(vector<tipo_vector> v){
-	for (int i=0; i<v.size(); i++)
-		cout << "Estoy imprimiendo el vector: " << v[i].get_dni() << endl;
+vector<tipo_vector> insercion(vector<tipo_vector> v){
+	
+	tipo_vector temp;
+	int i,j;
+
+	for (i=1; i<v.size(); i++){
+		
+		temp = v[i];
+		j = i - 1;
+
+		while ((v[j] > temp) && (j >= 0)){
+       		v[j+1] = v[j];
+    	    j--;
+    	}
+    	v[j+1] = temp;
+	}
+	return v;
 }

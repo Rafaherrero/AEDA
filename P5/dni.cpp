@@ -9,7 +9,8 @@ dni_(0)
 {
 	if (dni_entrada < 8000000 || dni_entrada > 99999999){
 		cout << "El DNI introducido no es válido. Se insertará un DNI aleatorio" << endl;
-		//Implementar DNI aleatorio
+		set_random();
+		cout << dni_ << endl;
 	}
 	else
 		dni_ = dni_entrada;
@@ -23,6 +24,13 @@ unsigned long int dni::get_dni(void){
 
 void dni::set_dni(unsigned long int dni_entrada){
 	dni_ = dni_entrada;
+}
+
+void dni::set_random(void){
+	random_device rd; // obtain a random number from hardware
+    mt19937 eng(rd()); // seed the generator (http://www.cplusplus.com/reference/random/mersenne_twister_engine/)
+    uniform_int_distribution<> distr(8000000, 99999999); // define the range
+    dni_ = distr(eng);
 }
 
 bool dni::operator<(dni& dni_cp){

@@ -1,5 +1,8 @@
+//Compilar usando 
+
+#include "common.hpp"
 #include "dni.hpp"
-#include <vector>
+#include "Algoritmos/insercion.hpp"
 
 using namespace std;
 
@@ -11,4 +14,5 @@ int main (void){
 		vector_dni[i].set_random();
 		cout << vector_dni[i].get_dni() << endl;
 	}
+	insercion(vector_dni);
 }

@@ -1,7 +1,4 @@
-#include <iostream>
-#include <cstdlib>
-#include <time.h>
-#include <random>
+#include "common.hpp"
 
 #pragma once
 

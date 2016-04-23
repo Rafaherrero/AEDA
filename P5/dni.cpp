@@ -7,13 +7,7 @@ dni::dni(void):
 dni::dni(unsigned long int dni_entrada):
 dni_(0)
 {
-	if (dni_entrada < 8000000 || dni_entrada > 99999999){
-		cout << "El DNI introducido no es válido. Se insertará un DNI aleatorio" << endl;
-		set_random();
-		cout << dni_ << endl;
-	}
-	else
-		dni_ = dni_entrada;
+	set_dni(dni_entrada);
 }
 
 dni::~dni(void){}
@@ -23,7 +17,13 @@ unsigned long int dni::get_dni(void){
 }
 
 void dni::set_dni(unsigned long int dni_entrada){
-	dni_ = dni_entrada;
+	if (dni_entrada < 8000000 || dni_entrada > 99999999){
+		cout << "El DNI introducido no es válido. Se insertará un DNI aleatorio" << endl;
+		set_random();
+	}
+	else{
+		dni_ = dni_entrada;
+	}
 }
 
 void dni::set_random(void){

@@ -6,19 +6,19 @@ using namespace std;
 template<class tipo_vector>
 vector<tipo_vector> insercion(vector<tipo_vector> v){
 	
-	tipo_vector temp;
+	tipo_vector tp;
 	int i,j;
 
 	for (i=1; i<v.size(); i++){
 		
-		temp = v[i];
+		tp = v[i];
 		j = i - 1;
 
-		while ((v[j] > temp) && (j >= 0)){
+		while ((v[j] > tp) && (j >= 0)){
        		v[j+1] = v[j];
     	    j--;
     	}
-    	v[j+1] = temp;
+    	v[j+1] = tp;
 	}
 	return v;
 }

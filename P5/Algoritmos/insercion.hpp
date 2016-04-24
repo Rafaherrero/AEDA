@@ -1,6 +1,3 @@
-#include "../common.hpp"
-#pragma once
-
 using namespace std;
 
 template<class tipo_vector>

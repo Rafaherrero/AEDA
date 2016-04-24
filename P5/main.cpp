@@ -4,6 +4,7 @@
 #include "dni.hpp"
 #include "Algoritmos/burbuja.hpp"
 #include "Algoritmos/insercion.hpp"
+#include "Algoritmos/seleccion.hpp"
 
 using namespace std;
 
@@ -43,7 +44,8 @@ int main (void){
 			cout << "1. Algoritmo Insercion" << endl;
 			cout << "2. Algoritmo MergeSort" << endl;
 			cout << "3. Algoritmo QuickSort" << endl;
-			cout << "4. Algoritmo ShellSort" << endl;
+			cout << "4. Algoritmo Seleccion" << endl;
+			cout << "5. Algoritmo ShellSort" << endl;
 			cout << "Introduzca una opcion: ";
 			cin >> alg_ejecutar;
 			if (!(alg_ejecutar>=0 && alg_ejecutar<=4))
@@ -71,19 +73,30 @@ int main (void){
 				insercion(vector_dni,0);				
 				break;
 			}
+			case 4:{
+				write(1,"\033[H\033[2J",7);
+				cout << "========== " << "DEMOSTRACIÓN SELECCION" << " ===========" << endl;
+				vector<dni> vector_dni(ct_pruebas);
+				for (int i=0;i<vector_dni.size();i++)
+					vector_dni[i].set_random();
+
+				seleccion(vector_dni,0);
+				break;
+			}
+
 		}
 	}
 	else{
-		vector<vector<unsigned long int>> resultados(5, vector<unsigned long int>(3));
+		vector<vector<unsigned long int>> resultados(6, vector<unsigned long int>(3));
 		write(1,"\033[H\033[2J",7);
 		cout << "============= " << "MODO ESTADÍSTICAS" << " =============" << endl;
 		cout << "Introduzca el tamaño de la secuencia a analizar: ";
 		cin >> tam_secuencia;
 		cout << "Introduzca la cantidad de veces que quiera que se repitan las pruebas: ";
 		cin >> num_rep;
-		cout << endl << "                      NUMERO DE COMPARACIONES" << endl;
-		cout << "                         Minimo - promedio - máximo" << endl;
-		for (int i=0; i<5; i++){
+		cout << endl << "                         NUMERO DE COMPARACIONES" << endl;
+		cout << "                         Minimo - Promedio - Máximo" << endl;
+		for (int i=0; i<6; i++){
 			switch (i){
 				case 0:{
 					vector<unsigned long int> cp_burbuja(num_rep);
@@ -125,42 +138,26 @@ int main (void){
 					cout << "Método de inserción:  " << setw(9) << resultados[1][0] << setw(11) << resultados[1][1] << setw(9) << resultados[1][2] << endl;
 					break;
 				}
+
+				case 4:{
+					vector<unsigned long int> cp_seleccion(num_rep);
+					vector<dni> vector_dni(tam_secuencia);
+					unsigned long int suma = 0;
+					for (int j=0; j<num_rep; j++){
+						for (int k=0;k<vector_dni.size();k++)
+							vector_dni[k].set_random();
+						cp_seleccion[j] = seleccion(vector_dni,1);
+						suma += cp_seleccion[j];
+					}
+					seleccion(cp_seleccion,1);
+					resultados[2][0] = cp_seleccion.front();
+					resultados[2][1] = (suma/cp_seleccion.size());
+					resultados[2][2] = cp_seleccion.back();
+
+					cout << "Método de seleccion:  " << setw(9) << resultados[2][0] << setw(11) << resultados[2][1] << setw(9) << resultados[2][2] << endl;
+					break;
+				}
 			}
 		}
 	}
 }
-
-
-
-
-
-
-
-
-/*
-	vector<dni> vector_dni_1(5);
-	cout << "Vector antes de ordenar por insercion: " << endl;
-	for (int i=0;i<vector_dni_1.size();i++){
-		vector_dni_1[i].set_random();
-		cout << vector_dni_1[i].get_dni() << endl;
-	}
-	vector<dni> A(0);
-	A = insercion(vector_dni_1);
-	cout << endl << "Vector después de ordenar por insercion: " << endl;
-	for (int i=0;i<A.size();i++){
-		cout << A[i].get_dni() << endl;
-	}
-
-	vector<dni> vector_dni_2(5);
-	cout << "Vector antes de ordenar por burbuja: " << endl;
-	for (int i=0;i<vector_dni_2.size();i++){
-		vector_dni_2[i].set_random();
-		cout << vector_dni_2[i].get_dni() << endl;
-	}
-	vector<dni> B(0);
-	B = burbuja(vector_dni_2);
-	cout << endl << "Vector después de ordenar por burbuja: " << endl;
-	for (int i=0;i<B.size();i++){
-		cout << B[i].get_dni() << endl;
-	}
-}*/

@@ -14,7 +14,7 @@ void quicksort(vector<tipo_vector> &v, unsigned inicio, unsigned final, unsigned
 	if (inicio >= final)
 		return;
 
-	int mitad = inicio + (final - inicio) / 2;
+	int mitad = inicio + (final-inicio)/2;
 	tipo_vector pivote = v[mitad];
 
 	swap(v[mitad], v[inicio]);
@@ -29,7 +29,7 @@ void quicksort(vector<tipo_vector> &v, unsigned inicio, unsigned final, unsigned
 			cp++;
 		}
 		cp++;
-		while(v[j] >  pivote){
+		while(v[j] > pivote){
 			j--;
 			cp++;
 		}
@@ -39,9 +39,9 @@ void quicksort(vector<tipo_vector> &v, unsigned inicio, unsigned final, unsigned
 			swap(v[i], v[j]);
 	}
 
-	swap(v[i - 1], v[inicio]);
-	int parte = i -1;
+	swap(v[i-1], v[inicio]);
+	int parte = i-1;
 
-	quicksort(v, inicio, parte - 1, cp, modo);
-	quicksort(v, parte + 1, final, cp, modo);
+	quicksort(v, inicio, parte-1, cp, modo);
+	quicksort(v, parte+1, final, cp, modo);
 }

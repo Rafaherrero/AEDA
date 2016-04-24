@@ -61,7 +61,7 @@ int main (void){
 				for (int i=0;i<vector_dni.size();i++)
 					vector_dni[i].set_random();
 
-				burbuja(vector_dni,0);
+				burbuja<dni>(vector_dni,0);
 				break;
 			}
 			case 1:{
@@ -71,7 +71,7 @@ int main (void){
 				for (int i=0;i<vector_dni.size();i++)
 					vector_dni[i].set_random();
 
-				insercion(vector_dni,0);				
+				insercion<dni>(vector_dni,0);				
 				break;
 			}
 			case 3:{
@@ -84,7 +84,7 @@ int main (void){
 				for (int i=0;i<vector_dni.size();i++)
 					cout << vector_dni[i] << endl;
 				cout << endl;
-				quicksort(vector_dni,0);
+				quicksort<dni>(vector_dni,0);
 
 				for (int i=0;i<vector_dni.size();i++)
 					cout << vector_dni[i] << endl;
@@ -98,7 +98,7 @@ int main (void){
 				for (int i=0;i<vector_dni.size();i++)
 					vector_dni[i].set_random();
 
-				seleccion(vector_dni,0);
+				seleccion<dni>(vector_dni,0);
 				break;
 			}
 
@@ -123,10 +123,10 @@ int main (void){
 					for (int j=0; j<num_rep; j++){
 						for (int k=0;k<vector_dni.size();k++)
 							vector_dni[k].set_random();
-						cp_burbuja[j] = burbuja(vector_dni,1);
+						cp_burbuja[j] = burbuja<dni>(vector_dni,1);
 						suma += cp_burbuja[j];
 					}
-					burbuja(cp_burbuja,1);
+					burbuja<unsigned long int>(cp_burbuja,1);
 					resultados[0][0] = cp_burbuja.front();
 					resultados[0][1] = (suma/cp_burbuja.size());
 					resultados[0][2] = cp_burbuja.back();
@@ -145,15 +145,37 @@ int main (void){
 					for (int j=0; j<num_rep; j++){
 						for (int k=0;k<vector_dni.size();k++)
 							vector_dni[k].set_random();
-						cp_insercion[j] = insercion(vector_dni,1);
+						cp_insercion[j] = insercion<dni>(vector_dni,1);
 						suma += cp_insercion[j];
 					}
-					insercion(cp_insercion,1);
+					insercion<unsigned long int>(cp_insercion,1);
 					resultados[1][0] = cp_insercion.front();
 					resultados[1][1] = (suma/cp_insercion.size());
 					resultados[1][2] = cp_insercion.back();
 
 					cout << "Método de inserción:  " << setw(9) << resultados[1][0] << setw(11) << resultados[1][1] << setw(9) << resultados[1][2] << endl;
+					break;
+				}
+
+				case 3:{
+					vector<unsigned long int> cp_quicksort(num_rep);
+					vector<dni> vector_dni(tam_secuencia);
+					unsigned long int suma = 0;
+					for (int j=0; j<num_rep; j++){
+						for (int k=0;k<vector_dni.size();k++)
+							vector_dni[k].set_random();
+						quicksort<dni>(vector_dni,1);
+						/*suma += cp_quicksort[j];*/
+
+					}
+					/*
+					quicksort<unsigned long int>(cp_quicksort,1);
+					resultados[3][0] = cp_quicksort.front();
+					resultados[3][1] = (suma/cp_quicksort.size());
+					resultados[3][2] = cp_quicksort.back();
+
+					cout << "Método de inserción:  " << setw(9) << resultados[3][0] << setw(11) << resultados[3][1] << setw(9) << resultados[3][2] << endl;
+					break;*/
 					break;
 				}
 
@@ -164,15 +186,15 @@ int main (void){
 					for (int j=0; j<num_rep; j++){
 						for (int k=0;k<vector_dni.size();k++)
 							vector_dni[k].set_random();
-						cp_seleccion[j] = seleccion(vector_dni,1);
+						cp_seleccion[j] = seleccion<dni>(vector_dni,1);
 						suma += cp_seleccion[j];
 					}
-					seleccion(cp_seleccion,1);
-					resultados[2][0] = cp_seleccion.front();
-					resultados[2][1] = (suma/cp_seleccion.size());
-					resultados[2][2] = cp_seleccion.back();
+					seleccion<unsigned long int>(cp_seleccion,1);
+					resultados[4][0] = cp_seleccion.front();
+					resultados[4][1] = (suma/cp_seleccion.size());
+					resultados[4][2] = cp_seleccion.back();
 
-					cout << "Método de seleccion:  " << setw(9) << resultados[2][0] << setw(11) << resultados[2][1] << setw(9) << resultados[2][2] << endl;
+					cout << "Método de seleccion:  " << setw(9) << resultados[4][0] << setw(11) << resultados[4][1] << setw(9) << resultados[4][2] << endl;
 					break;
 				}
 			}

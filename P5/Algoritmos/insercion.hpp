@@ -12,7 +12,7 @@ unsigned long int insercion(vector<tipo_vector> &v, unsigned modo){
 
 	if (modo==0){
 		cin.ignore();
-		cout << "Vector antes de ejecutar insercion: " << endl;
+		cout << "Secuencia antes de ejecutar insercion: " << endl;
 		for (int i=0; i < v.size(); i++)
 			cout << i+1 << ". " << v[i] << endl;
 	}
@@ -47,7 +47,7 @@ unsigned long int insercion(vector<tipo_vector> &v, unsigned modo){
     	v[j+1] = tp;
 
     	if (modo==0){
-    		cout << "El vector en este paso queda así: " << endl;
+    		cout << "La secuencia en este paso queda así: " << endl;
 
     		for (int i=0; i < v.size(); i++)
 				cout << i+1 << ". " << v[i] << endl;

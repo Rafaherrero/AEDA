@@ -4,10 +4,11 @@
 using namespace std;
 
 template<class tipo_vector>
-vector<tipo_vector> insercion(vector<tipo_vector> v, unsigned modo){
+unsigned long int insercion(vector<tipo_vector> &v, unsigned modo){
 	
 	tipo_vector tp;
 	int i,j;
+	unsigned long int cp = 0;
 
 	if (modo==0){
 		cin.ignore();
@@ -26,9 +27,9 @@ vector<tipo_vector> insercion(vector<tipo_vector> v, unsigned modo){
 			cout << j+1 << ". " << v[j] << endl;
 			cout << i+1 << ". " << v[i] << endl << endl;
 		}
-
+		cp++;
 		while ((v[j] > tp) && (j >= 0)){
-
+			cp++;
 			if (modo==0)
 				cout << "Como el valor de la posicion " << j+1 << ": " << v[j] << " es mayor que el de la posicion " << j+2 << ": "<< tp << ", inserto el mayor en la posicion siguiente." << endl;
 
@@ -59,5 +60,5 @@ vector<tipo_vector> insercion(vector<tipo_vector> v, unsigned modo){
 	if (modo==0)
 		cout << "LA SECUENCIA YA ESTA ORDENADA" << endl << endl;
 
-	return v;
+	return cp;
 }

@@ -19,6 +19,7 @@ int main (void){
 	unsigned opc = 2;
 	unsigned ct_pruebas = 25;
 	unsigned alg_ejecutar = 5;
+	unsigned tam_secuencia, num_rep;
 
 	while (opc != 0 && opc != 1){
 		cout << "================ " << "ORDENACION" << " =================" << endl;
@@ -54,13 +55,10 @@ int main (void){
 				write(1,"\033[H\033[2J",7);
 				cout << "=========== " << "DEMOSTRACIÓN BURBUJA" << " ============" << endl;
 				vector<dni> vector_dni(ct_pruebas);
-				
 				for (int i=0;i<vector_dni.size();i++)
 					vector_dni[i].set_random();
 
-				vector<dni> B(0);
-				B = burbuja(vector_dni,0);
-				
+				burbuja(vector_dni,0);
 				break;
 			}
 			case 1:{
@@ -70,14 +68,68 @@ int main (void){
 				for (int i=0;i<vector_dni.size();i++)
 					vector_dni[i].set_random();
 
-				vector<dni> I(0);
-				I = insercion(vector_dni,0);
-				
+				insercion(vector_dni,0);				
 				break;
 			}
 		}
 	}
+	else{
+		vector<vector<unsigned long int>> resultados(5, vector<unsigned long int>(3));
+		write(1,"\033[H\033[2J",7);
+		cout << "============= " << "MODO ESTADÍSTICAS" << " =============" << endl;
+		cout << "Introduzca el tamaño de la secuencia a analizar: ";
+		cin >> tam_secuencia;
+		cout << "Introduzca la cantidad de veces que quiera que se repitan las pruebas: ";
+		cin >> num_rep;
+		cout << endl << "                      NUMERO DE COMPARACIONES" << endl;
+		cout << "                         Minimo - promedio - máximo" << endl;
+		for (int i=0; i<5; i++){
+			switch (i){
+				case 0:{
+					vector<unsigned long int> cp_burbuja(num_rep);
+					vector<dni> vector_dni(tam_secuencia);
+					unsigned long int suma = 0;
+					for (int j=0; j<num_rep; j++){
+						for (int k=0;k<vector_dni.size();k++)
+							vector_dni[k].set_random();
+						cp_burbuja[j] = burbuja(vector_dni,1);
+						suma += cp_burbuja[j];
+					}
+					burbuja(cp_burbuja,1);
+					resultados[0][0] = cp_burbuja.front();
+					resultados[0][1] = (suma/cp_burbuja.size());
+					resultados[0][2] = cp_burbuja.back();
+
+					cout << "Método de la burbuja: " << setw(9) << resultados[0][0] << setw(11) << resultados[0][1] << setw(9) << resultados[0][2] << endl;
+					break;
+
+
+
+					break;
+				}
+				case 1:{
+					vector<unsigned long int> cp_insercion(num_rep);
+					vector<dni> vector_dni(tam_secuencia);
+					unsigned long int suma = 0;
+					for (int j=0; j<num_rep; j++){
+						for (int k=0;k<vector_dni.size();k++)
+							vector_dni[k].set_random();
+						cp_insercion[j] = insercion(vector_dni,1);
+						suma += cp_insercion[j];
+					}
+					insercion(cp_insercion,1);
+					resultados[1][0] = cp_insercion.front();
+					resultados[1][1] = (suma/cp_insercion.size());
+					resultados[1][2] = cp_insercion.back();
+
+					cout << "Método de inserción:  " << setw(9) << resultados[1][0] << setw(11) << resultados[1][1] << setw(9) << resultados[1][2] << endl;
+					break;
+				}
+			}
+		}
+	}
 }
+
 
 
 

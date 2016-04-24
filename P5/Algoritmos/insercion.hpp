@@ -4,10 +4,16 @@
 using namespace std;
 
 template<class tipo_vector>
-vector<tipo_vector> insercion(vector<tipo_vector> v){
+vector<tipo_vector> insercion(vector<tipo_vector> v, unsigned modo){
 	
 	tipo_vector tp;
 	int i,j;
+
+	if (modo==0){
+		cout << "Vector antes de ejecutar insercion: " << endl;
+		for (int i=0; i < v.size(); i++)
+			cout << i+1 << ". " << v[i] << endl;
+	}
 
 	for (i=1; i<v.size(); i++){
 		

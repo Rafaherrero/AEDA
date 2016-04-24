@@ -4,7 +4,7 @@
 using namespace std;
 
 template<class tipo_vector>
-vector<tipo_vector> burbuja(vector<tipo_vector> v){
+vector<tipo_vector> burbuja(vector<tipo_vector> v, unsigned modo){
 
 	tipo_vector tp;
 	int i,j;

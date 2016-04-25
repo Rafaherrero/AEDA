@@ -3,45 +3,99 @@ using namespace std;
 template<class tipo_vector>
 unsigned long int quicksort(vector<tipo_vector> &v, unsigned modo){
 	unsigned long int cp=0;
+
+	if (modo==0){
+        cin.ignore();
+        cout << "Secuencia antes de ejecutar quicksort: " << endl;
+        for (int i=0; i < v.size(); i++)
+            cout << i+1 << ". " << v[i] << endl;
+        cout << endl;
+    }
+
 	quicksort(v, 0, v.size()-1, cp, modo);
+
+	if (modo==0){
+        cout << endl << "Secuencia tras el ejecutar quicksort: " << endl;
+        for (int i=0; i < v.size(); i++)
+            cout << i+1 << ". " << v[i] << endl;
+        cout << "LA SECUENCIA YA ESTA ORDENADA" << endl << endl;
+    }
+
 	return cp;
 }
 
 template<class tipo_vector>
 void quicksort(vector<tipo_vector> &v, int inicio, int final, unsigned long int &cp, unsigned modo){
 
-	cp++;
-	if (inicio >= final)
-		return;
+    int i = inicio, j = final;
+    tipo_vector tmp;
+    tipo_vector pivote = v[(inicio + final)/2];
 
-	int mitad = inicio + (final-inicio)/2;
-	tipo_vector pivote = v[mitad];
+    cp++;
+    while (i <= j) {
 
-	swap(v[mitad], v[inicio]);
+    	if (modo==0)
+    		cout << "Como el centinela izquierda: " << i << " es menor o igual que el de la derecha: " << j << ", intercambiamos." << endl;
 
-	int i = inicio+1;
-	int j = final;
+    	cp++;
+        while (v[i] < pivote){
 
-	while (i <= j){
-		cp++;
-		while(i <= j && v[i] <= pivote){
-			i++;
-			cp++;
-		}
-		cp++;
-		while(v[j] > pivote){
-			j--;
-			cp++;
-		}
+        	if(modo==0)
+        		cout << "Como el valor en el centinela izquierda: " << v[i] << " es menor que el del pivote: " << pivote << ", aumentamos el centinela." << endl;
+            i++;
+        }
+        cp++;
+        while (v[j] > pivote){
 
-		cp++;
-		if (i < j)
-			swap(v[i], v[j]);
-	}
+        	if(modo==0)
+        		cout << "Como el valor en el centinela derecha: " << v[j] << " es mayor que el del pivote: " << pivote << ", disminuimos el centinela." << endl;
+            j--;
+        }
+        cp++;
+        if (i <= j) {
 
-	swap(v[i-1], v[inicio]);
-	int parte = i-1;
+        	if(modo==0)
+        		cout << "Como el valor del centinela izquierda: " << i << " es menor o igual que el de la derecha: " << j << ", intercambiamos." << endl;
 
-	quicksort(v, inicio, parte-1, cp, modo);
-	quicksort(v, parte+1, final, cp, modo);
+            tmp = v[i];
+            v[i] = v[j];
+            v[j] = tmp;
+            i++;
+            j--;
+        }
+    };
+
+    cp++;
+    if (inicio < j){
+
+    	if(modo==0){
+    		cout << "Como el centinela izquierda es menor que el de derecha, ordenamos el lado izquierdo." << endl;
+    		cout << endl << "La secuencia en este paso queda así: " << endl;
+
+                for (int i=0; i < v.size(); i++)
+                    cout << i+1 << ". " << v[i] << endl;
+
+                cout << endl << "=============================";
+                cin.ignore();
+    	}
+
+        quicksort(v, inicio, j, cp, modo);
+    }
+    cp++;
+    if (i < final){
+
+    	if(modo==0){
+    		cout << "Como el centinela izquierda es mayor que el de derecha, ordenamos el lado derecho." << endl;
+    		cout << endl << "La secuencia en este paso queda así: " << endl;
+
+                for (int i=0; i < v.size(); i++)
+                    cout << i+1 << ". " << v[i] << endl;
+
+                cout << endl << "=============================";
+                cin.ignore();
+    	}
+
+        quicksort(v, i, final, cp, modo);
+    }
+
 }

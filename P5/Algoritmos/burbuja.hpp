@@ -6,6 +6,7 @@ unsigned long int burbuja(vector<tipo_vector> &v, unsigned modo){
 	tipo_vector tp;
 	int i,j;
     unsigned long int cp = 0;
+    bool intercambio;
 
     if (modo==0){
         cin.ignore();
@@ -14,8 +15,9 @@ unsigned long int burbuja(vector<tipo_vector> &v, unsigned modo){
             cout << i+1 << ". " << v[i] << endl;
     }
 
-	for (i=1; i<v.size(); i++){
-   		for (j=0 ; j<v.size() - 1; j++){
+	for (i=0; i<v.size(); i++){
+        intercambio=false;
+   		for (j= v.size()-1 ; j>i; j--){
             cp++;
 
             if (modo==0){
@@ -24,14 +26,15 @@ unsigned long int burbuja(vector<tipo_vector> &v, unsigned modo){
                 cout << j+2 << ". " << v[j+1] << endl;
             }
 
-    		if (v[j] > v[j+1]){
+    		if (v[j] < v[j-1]){
 
                  if (modo==0)
-                    cout << "Como el valor de la posicion " << j+1 << ": " << v[j] << " es mayor que el de la posicion " << j+2 << ": " << v[j+1] << ", " << v[j] << " 'sube'." << endl;
+                    cout << "Como el valor de la posicion " << j+1 << ": " << v[j] << " es menor que el de la posicion " << j+2 << ": " << v[j+1] << ", " << v[j] << " 'sube'." << endl;
 
 				tp = v[j];   
-    			v[j] = v[j+1];   
-    			v[j+1] = tp;
+    			v[j] = v[j-1];   
+    			v[j-1] = tp;
+                intercambio=true;
     		}
 
             if (modo==0){
@@ -44,6 +47,11 @@ unsigned long int burbuja(vector<tipo_vector> &v, unsigned modo){
                 cin.ignore();
             }
     	}
+        if(!intercambio){
+            if (modo==0)
+                cout << "No ha ocurrido ningún cambio. Se termina la ejecución." << endl;
+            break;
+        }
     }
 
     if (modo==0){

@@ -81,14 +81,7 @@ int main (void){
 				for (int i=0;i<vector_dni.size();i++)
 					vector_dni[i].set_random();
 
-				for (int i=0;i<vector_dni.size();i++)
-					cout << vector_dni[i] << endl;
-				cout << endl;
 				quicksort<dni>(vector_dni,0);
-
-				for (int i=0;i<vector_dni.size();i++)
-					cout << vector_dni[i] << endl;
-
 				break;
 			}
 			case 4:{

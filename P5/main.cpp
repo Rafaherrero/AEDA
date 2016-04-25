@@ -6,6 +6,7 @@
 #include "Algoritmos/insercion.hpp"
 #include "Algoritmos/seleccion.hpp"
 #include "Algoritmos/quicksort.hpp"
+#include "Algoritmos/mergesort.hpp"
 
 using namespace std;
 
@@ -68,10 +69,28 @@ int main (void){
 				write(1,"\033[H\033[2J",7);
 				cout << "========== " << "DEMOSTRACIÓN INSERCION" << " ===========" << endl;
 				vector<dni> vector_dni(ct_pruebas);
+
 				for (int i=0;i<vector_dni.size();i++)
 					vector_dni[i].set_random();
 
-				insercion<dni>(vector_dni,0);				
+				insercion<dni>(vector_dni,0);		
+				break;
+			}
+			case 2:{
+				write(1,"\033[H\033[2J",7);
+				cout << "========== " << "DEMOSTRACIÓN MERGESORT" << " ===========" << endl;
+				vector<dni> vector_dni(ct_pruebas);
+				for (int i=0;i<vector_dni.size();i++)
+					vector_dni[i].set_random();
+
+				for (int i=0;i<vector_dni.size();i++)
+					cout << vector_dni[i] << endl;
+
+				mergesort<dni>(vector_dni,0);
+
+				for (int i=0;i<vector_dni.size();i++)
+					cout << vector_dni[i] << endl;
+
 				break;
 			}
 			case 3:{

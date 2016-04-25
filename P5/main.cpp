@@ -133,10 +133,6 @@ int main (void){
 
 					cout << "Método de la burbuja: " << setw(9) << resultados[0][0] << setw(11) << resultados[0][1] << setw(9) << resultados[0][2] << endl;
 					break;
-
-
-
-					break;
 				}
 				case 1:{
 					vector<unsigned long int> cp_insercion(num_rep);
@@ -164,18 +160,17 @@ int main (void){
 					for (int j=0; j<num_rep; j++){
 						for (int k=0;k<vector_dni.size();k++)
 							vector_dni[k].set_random();
-						quicksort<dni>(vector_dni,1);
-						/*suma += cp_quicksort[j];*/
+						cp_quicksort[j] = quicksort<dni>(vector_dni,1);
+						suma += cp_quicksort[j];
 
 					}
-					/*
-					quicksort<unsigned long int>(cp_quicksort,1);
+					
+					insercion<unsigned long int>(cp_quicksort,1);
 					resultados[3][0] = cp_quicksort.front();
 					resultados[3][1] = (suma/cp_quicksort.size());
 					resultados[3][2] = cp_quicksort.back();
 
-					cout << "Método de inserción:  " << setw(9) << resultados[3][0] << setw(11) << resultados[3][1] << setw(9) << resultados[3][2] << endl;
-					break;*/
+					cout << "Método de quicksort:  " << setw(9) << resultados[3][0] << setw(11) << resultados[3][1] << setw(9) << resultados[3][2] << endl;
 					break;
 				}
 

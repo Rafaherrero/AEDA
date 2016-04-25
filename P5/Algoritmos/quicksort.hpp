@@ -8,7 +8,7 @@ unsigned long int quicksort(vector<tipo_vector> &v, unsigned modo){
 }
 
 template<class tipo_vector>
-void quicksort(vector<tipo_vector> &v, unsigned inicio, unsigned final, unsigned long int &cp, unsigned modo){
+void quicksort(vector<tipo_vector> &v, int inicio, int final, unsigned long int &cp, unsigned modo){
 
 	cp++;
 	if (inicio >= final)

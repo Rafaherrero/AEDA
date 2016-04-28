@@ -1,58 +1,34 @@
 using namespace std;
 
 template<class tipo_vector>
-unsigned long int quicksort(vector<tipo_vector> &v, unsigned modo){
-	unsigned long int cp=0;
-
-	if (modo==0){
-        cin.ignore();
-        cout << "Secuencia antes de ejecutar quicksort: " << endl;
-        for (int i=0; i < v.size(); i++)
-            cout << i+1 << ". " << v[i] << endl;
-        cout << endl;
-    }
-
-	quicksort(v, 0, v.size()-1, cp, modo);
-
-	if (modo==0){
-        cout << endl << "Secuencia tras el ejecutar quicksort: " << endl;
-        for (int i=0; i < v.size(); i++)
-            cout << i+1 << ". " << v[i] << endl;
-        cout << "LA SECUENCIA YA ESTA ORDENADA" << endl << endl;
-    }
-
-	return cp;
-}
-
-template<class tipo_vector>
 void quicksort(vector<tipo_vector> &v, int inicio, int final, unsigned long int &cp, unsigned modo){
 
     int i = inicio, j = final;
     tipo_vector tmp;
     tipo_vector pivote = v[(inicio + final)/2];
 
-    cp++;
     while (i <= j) {
 
     	if (modo==0)
     		cout << "Como el centinela izquierda: " << i << " es menor o igual que el de la derecha: " << j << ", intercambiamos." << endl;
 
-    	cp++;
         while (v[i] < pivote){
-
         	if(modo==0)
         		cout << "Como el valor en el centinela izquierda: " << v[i] << " es menor que el del pivote: " << pivote << ", aumentamos el centinela." << endl;
             i++;
+            cp++;
         }
-        cp++;
-        while (v[j] > pivote){
+            cp++;
 
+        while (v[j] > pivote){
         	if(modo==0)
         		cout << "Como el valor en el centinela derecha: " << v[j] << " es mayor que el del pivote: " << pivote << ", disminuimos el centinela." << endl;
             j--;
+            cp++;
         }
-        cp++;
-        if (i <= j) {
+            cp++;
+
+        if (i < j) {
 
         	if(modo==0)
         		cout << "Como el valor del centinela izquierda: " << i << " es menor o igual que el de la derecha: " << j << ", intercambiamos." << endl;
@@ -63,9 +39,12 @@ void quicksort(vector<tipo_vector> &v, int inicio, int final, unsigned long int 
             i++;
             j--;
         }
+        else if (i==j){
+            i++;
+            j--;
+        }
     };
 
-    cp++;
     if (inicio < j){
 
     	if(modo==0){
@@ -98,4 +77,28 @@ void quicksort(vector<tipo_vector> &v, int inicio, int final, unsigned long int 
         quicksort(v, i, final, cp, modo);
     }
 
+}
+
+template<class tipo_vector>
+unsigned long int quicksort(vector<tipo_vector> &v, unsigned modo){
+    unsigned long int cp=0;
+
+    if (modo==0){
+        cin.ignore();
+        cout << "Secuencia antes de ejecutar quicksort: " << endl;
+        for (int i=0; i < v.size(); i++)
+            cout << i+1 << ". " << v[i] << endl;
+        cout << endl;
+    }
+
+    quicksort(v, 0, v.size()-1, cp, modo);
+
+    if (modo==0){
+        cout << endl << "Secuencia tras el ejecutar quicksort: " << endl;
+        for (int i=0; i < v.size(); i++)
+            cout << i+1 << ". " << v[i] << endl;
+        cout << "LA SECUENCIA YA ESTA ORDENADA" << endl << endl;
+    }
+
+    return cp;
 }

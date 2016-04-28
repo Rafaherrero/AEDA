@@ -24,8 +24,9 @@ void Mezcla(vector<tipo_vector> &v, int inicio, int cen, int fin, unsigned long 
 
 	int i = inicio, j = cen+1, k = inicio;
 	auto tp = v;
-	
-	while ((i <= cen) && (j <= fin)){ 
+	cp++;
+	while ((i <= cen) && (j <= fin)){
+		cp++; 
 		if (v[i] < v[j]){
 		 	tp[k] = v[i];
 			i++;
@@ -36,19 +37,23 @@ void Mezcla(vector<tipo_vector> &v, int inicio, int cen, int fin, unsigned long 
 			}
 		k++;
 	}
-	
-	if(i > cen)
+	cp++;
+	if(i > cen){
+		cp++;
 		while (j <= fin){ 
 			tp[k] = v[j];
 			j++; 
 			k++;
 		}
-	else
+	}
+	else{
+		cp++;
 		while (i <= cen){ 
 			tp[k] = v[i];
 			i++; 
 			k++;
 		}
+	}
 
 	for (int k = inicio; k <= fin; k++)
 		v[k] = tp[k] ;

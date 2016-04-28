@@ -21,10 +21,8 @@ unsigned long int shellsort(vector<tipo_vector> &v, unsigned modo){
 			cin.ignore();
 		}
 	}
-	else{
-		cout << "El alpha utilizado es 0,99." << endl;
+	else
 		alpha = 0.45454;
-	}
 
 	int delta = v.size();
 	tipo_vector tp;

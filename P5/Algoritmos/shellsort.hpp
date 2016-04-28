@@ -23,7 +23,7 @@ unsigned long int shellsort(vector<tipo_vector> &v, unsigned modo){
 	}
 	else{
 		cout << "El alpha utilizado es 0,99." << endl;
-		alpha = 0.99;
+		alpha = 0.45454;
 	}
 
 	int delta = v.size();
@@ -36,7 +36,7 @@ unsigned long int shellsort(vector<tipo_vector> &v, unsigned modo){
 			tipo_vector x = v[i];
 			unsigned j = i;
 			cp++;
-			while((j >= delta) && (x < v[j-delta])){
+			while((j > delta) && (x < v[j-delta])){
 
 				if (modo==0){
 					cout << "Con alpha: " << alpha << " el delta ahora vale: " << delta << endl;

@@ -10,8 +10,13 @@ unsigned long int mergesort(vector<tipo_vector> &v, unsigned modo){
 template<class tipo_vector>
 void Msort(vector<tipo_vector> &v, int inicio, int fin, unsigned long int &cp, unsigned modo){
 	int cen;
-	cp++;
+	cp++; 
+
 	if (inicio < fin){ 
+
+		if(modo==0)
+			cout << "Como inicio: " << inicio << " es más pequeño que fin: " << final << ", dividimos la secuencia por la mitad." << endl;
+
 		cen = (inicio + fin)/2;
 		Msort (v, inicio, cen, cp, modo);
 		Msort (v, cen+1, fin, cp, modo);

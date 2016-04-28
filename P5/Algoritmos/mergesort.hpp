@@ -59,10 +59,8 @@ void Msort(vector<tipo_vector> &v, int inicio, int fin, unsigned long int &cp, u
 
 		cen = (inicio + fin)/2;
 
-		if(modo==0){
+		if(modo==0)
 			cout << "Dividimos la secuencia desde la posicion " << inicio+1 << " hasta la " << cen+1 << "." << endl;
-			cin.ignore();
-		}
 
 		Msort (v, inicio, cen, cp, modo);
 
@@ -72,9 +70,19 @@ void Msort(vector<tipo_vector> &v, int inicio, int fin, unsigned long int &cp, u
 		Msort (v, cen+1, fin, cp, modo);
 
 		if(modo==0)
-			cout << "Ahora mezclamos entre las posiciones " << inicio+1 << ", " << cen+1 << " y " << fin+1 << "." << endl << endl;
+			cout << "Ahora mezclamos entre las posiciones " << cen+1 << " y " << fin+1 << "." << endl << endl;
 
 		Mezcla (v, inicio, cen, fin, cp, modo);
+
+		if(modo==0){
+			cout << endl << "La secuencia en este paso queda así: " << endl;
+
+            for (int i=0; i < v.size(); i++)
+                cout << i+1 << ". " << v[i] << endl;
+
+            cout << endl << "=============================";
+            cin.ignore();
+        }
 	}
 }
 
@@ -91,5 +99,10 @@ unsigned long int mergesort(vector<tipo_vector> &v, unsigned modo){
 
 	unsigned long int cp=0;
 	Msort(v,0,v.size()-1,cp, modo);
+
+	if (modo==0){
+        cout << "LA SECUENCIA YA ESTA ORDENADA" << endl << endl;
+    }
+
 	return cp;
 }

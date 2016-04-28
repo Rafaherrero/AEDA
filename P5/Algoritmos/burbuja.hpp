@@ -21,21 +21,23 @@ unsigned long int burbuja(vector<tipo_vector> &v, unsigned modo){
             cp++;
 
             if (modo==0){
-                cout << endl << "Realizo la comparación de las posiciones " << j+1 << " y " << j+2 << endl;
+                cout << endl << "Realizo la comparación de las posiciones " << j << " y " << j+1 << endl;
+                cout << j << ". " << v[j-1] << endl;
                 cout << j+1 << ". " << v[j] << endl;
-                cout << j+2 << ". " << v[j+1] << endl;
             }
 
     		if (v[j] < v[j-1]){
 
                  if (modo==0)
-                    cout << "Como el valor de la posicion " << j+1 << ": " << v[j] << " es menor que el de la posicion " << j+2 << ": " << v[j+1] << ", " << v[j] << " 'sube'." << endl;
+                    cout << "Como el valor de la posicion " << j+1 << ": " << v[j] << " es menor que el de la posicion " << j << ": " << v[j-1] << ", " << v[j] << " 'sube'." << endl;
 
 				tp = v[j];   
     			v[j] = v[j-1];   
     			v[j-1] = tp;
                 intercambio=true;
     		}
+            else if (modo==0)
+                cout << "Como el valor de la posicion " << j+1 << ": " << v[j] << " NO es menor que el de la posicion " << j << ": " << v[j-1] << ", " << v[j] << " no sube." << endl;
 
             if (modo==0){
                 cout << endl << "La secuencia en este paso queda así: " << endl;

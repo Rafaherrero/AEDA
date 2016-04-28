@@ -7,6 +7,9 @@
 #include "Algoritmos/seleccion.hpp"
 #include "Algoritmos/quicksort.hpp"
 #include "Algoritmos/mergesort.hpp"
+#include "Algoritmos/shellsort.hpp"
+
+#define cantidad_algoritmos 6
 
 using namespace std;
 
@@ -17,11 +20,25 @@ void error(void){
 	write(1,"\033[H\033[2J",7); //Esto sustituye al nada recomendable system("clear")
 }
 
+void calcular_cp(vector<float> &com, vector<vector<float>> &v, float sm, unsigned int num_alg){
+	
+	insercion<float>(com,1);
+
+	v[num_alg][0] = com.front();
+	v[num_alg][1] = (sm/com.size());
+	v[num_alg][2] = com.back();
+}
+
+void randomizar(vector<dni> &v){
+	for (int i=0;i<v.size();i++)
+		v[i].set_random();
+}
+
 int main (void){
 
 	unsigned opc = 2;
 	unsigned ct_pruebas = 25;
-	unsigned alg_ejecutar = 5;
+	unsigned alg_ejecutar = 100;
 	unsigned tam_secuencia, num_rep;
 
 	while (opc != 0 && opc != 1){
@@ -36,7 +53,7 @@ int main (void){
 	}
 
 	if (opc==0){
-		while (!(alg_ejecutar>=0 && alg_ejecutar<=4)){ //alg_ejecutar != 0 && alg_ejecutar != 1 && alg_ejecutar != 2 && alg_ejecutar != 3 && alg_ejecutar != 4
+		while (!(alg_ejecutar>=0 && alg_ejecutar<=(cantidad_algoritmos-1))){ //alg_ejecutar != 0 && alg_ejecutar != 1 && alg_ejecutar != 2 && alg_ejecutar != 3 && alg_ejecutar != 4
 			write(1,"\033[H\033[2J",7);
 			cout << "============= " << "MODO DEMOSTRACIÓN" << " =============" << endl;
 			cout << "Introduzca el numero de pruebas a realizar: ";
@@ -50,17 +67,15 @@ int main (void){
 			cout << "5. Algoritmo ShellSort" << endl;
 			cout << "Introduzca una opcion: ";
 			cin >> alg_ejecutar;
-			if (!(alg_ejecutar>=0 && alg_ejecutar<=4))
+			if (!(alg_ejecutar>=0 && alg_ejecutar<=(cantidad_algoritmos-1)))
 				error();
 		}
-
+		vector<dni> vector_dni(ct_pruebas);
 		switch (alg_ejecutar){
 			case 0:{
 				write(1,"\033[H\033[2J",7);
 				cout << "=========== " << "DEMOSTRACIÓN BURBUJA" << " ============" << endl;
-				vector<dni> vector_dni(ct_pruebas);
-				for (int i=0;i<vector_dni.size();i++)
-					vector_dni[i].set_random();
+				randomizar(vector_dni);
 
 				burbuja<dni>(vector_dni,0);
 				break;
@@ -68,9 +83,7 @@ int main (void){
 			case 1:{
 				write(1,"\033[H\033[2J",7);
 				cout << "========== " << "DEMOSTRACIÓN INSERCION" << " ===========" << endl;
-				vector<dni> vector_dni(ct_pruebas);
-				for (int i=0;i<vector_dni.size();i++)
-					vector_dni[i].set_random();
+				randomizar(vector_dni);
 
 				insercion<dni>(vector_dni,0);		
 				break;
@@ -78,9 +91,7 @@ int main (void){
 			case 2:{
 				write(1,"\033[H\033[2J",7);
 				cout << "========== " << "DEMOSTRACIÓN MERGESORT" << " ===========" << endl;
-				vector<dni> vector_dni(ct_pruebas);
-				for (int i=0;i<vector_dni.size();i++)
-					vector_dni[i].set_random();
+				randomizar(vector_dni);
 
 				mergesort<dni>(vector_dni,0);
 
@@ -89,9 +100,7 @@ int main (void){
 			case 3:{
 				write(1,"\033[H\033[2J",7);
 				cout << "========== " << "DEMOSTRACIÓN QUICKSORT" << " ===========" << endl;
-				vector<dni> vector_dni(ct_pruebas);
-				for (int i=0;i<vector_dni.size();i++)
-					vector_dni[i].set_random();
+				randomizar(vector_dni);
 
 				quicksort<dni>(vector_dni,0);
 				break;
@@ -99,17 +108,24 @@ int main (void){
 			case 4:{
 				write(1,"\033[H\033[2J",7);
 				cout << "========== " << "DEMOSTRACIÓN SELECCION" << " ===========" << endl;
-				vector<dni> vector_dni(ct_pruebas);
-				for (int i=0;i<vector_dni.size();i++)
-					vector_dni[i].set_random();
+				randomizar(vector_dni);
 
 				seleccion<dni>(vector_dni,0);
+				break;
+			}
+			case 5:{
+				write(1,"\033[H\033[2J",7);
+				cout << "========== " << "DEMOSTRACIÓN SHELLSORT" << " ===========" << endl;
+				randomizar(vector_dni);
+
+				shellsort<dni>(vector_dni,0);
 				break;
 			}
 
 		}
 	}
 	else{
+		
 		write(1,"\033[H\033[2J",7);
 		cout << "============= " << "MODO ESTADÍSTICAS" << " =============" << endl;
 		cout << "Introduzca el tamaño de la secuencia a analizar: ";
@@ -118,105 +134,108 @@ int main (void){
 		cin >> num_rep;
 		cout << endl << "                               NUMERO DE COMPARACIONES" << endl;
 		cout << "                            Minimo -  Promedio  -   Maximo" << endl;
+
+		vector<dni> vector_dni(tam_secuencia);
+		vector<vector<float>> resultados(cantidad_algoritmos, vector<float>(3));
+		vector<float> comp(num_rep);
+		float suma = 0;
+
 		for (int i=0; i<6; i++){
 			switch (i){
 				case 0:{
-					vector<float> cp_burbuja(num_rep);
-					vector<dni> vector_dni(tam_secuencia);
-					vector<vector<float>> resultados(6, vector<float>(3));
-					float suma = 0;
+					
 					for (int j=0; j<num_rep; j++){
 						for (int k=0;k<vector_dni.size();k++)
 							vector_dni[k].set_random();
-						cp_burbuja[j] = burbuja<dni>(vector_dni,1);
-						suma += cp_burbuja[j];
+						comp[j] = burbuja<dni>(vector_dni,1);
+						suma += comp[j];
 					}
-					burbuja<float>(cp_burbuja,1);
-					resultados[0][0] = cp_burbuja.front();
-					resultados[0][1] = (suma/cp_burbuja.size());
-					resultados[0][2] = cp_burbuja.back();
+
+					calcular_cp(comp, resultados, suma, 0);
 
 					cout << "Método de la burbuja: " << setw(12) << resultados[0][0] << setw(12) << resultados[0][1] << setw(12) << resultados[0][2] << endl;
+					suma=0;
 					break;
 				}
+
 				case 1:{
-					vector<float> cp_insercion(num_rep);
-					vector<dni> vector_dni(tam_secuencia);
-					vector<vector<float>> resultados(6, vector<float>(3));
-					float suma = 0;
+					
 					for (int j=0; j<num_rep; j++){
 						for (int k=0;k<vector_dni.size();k++)
 							vector_dni[k].set_random();
-						cp_insercion[j] = insercion<dni>(vector_dni,1);
-						suma += cp_insercion[j];
+						comp[j] = insercion<dni>(vector_dni,1);
+						suma += comp[j];
 					}
-					insercion<float>(cp_insercion,1);
-					resultados[1][0] = cp_insercion.front();
-					resultados[1][1] = (suma/cp_insercion.size());
-					resultados[1][2] = cp_insercion.back();
+
+					calcular_cp(comp, resultados, suma, 1);
 
 					cout << "Método de inserción:  " << setw(12) << resultados[1][0] << setw(12) << resultados[1][1] << setw(12) << resultados[1][2] << endl;
+					suma=0;
 					break;
 				}
+
 				case 2:{
-					vector<float> cp_mergesort(num_rep);
-					vector<dni> vector_dni(tam_secuencia);
-					vector<vector<float>> resultados(6, vector<float>(3));
-					float suma = 0;
+
 					for (int j=0; j<num_rep; j++){
 						for (int k=0;k<vector_dni.size();k++)
 							vector_dni[k].set_random();
-						cp_mergesort[j] = mergesort<dni>(vector_dni,1);
-						suma += cp_mergesort[j];
+						comp[j] = mergesort<dni>(vector_dni,1);
+						suma += comp[j];
 					}
-					mergesort<float>(cp_mergesort,1);
-					resultados[1][0] = cp_mergesort.front();
-					resultados[1][1] = (suma/cp_mergesort.size());
-					resultados[1][2] = cp_mergesort.back();
+					
+					calcular_cp(comp, resultados, suma, 2);
 
-					cout << "Método de mergesort:  " << setw(12) << resultados[1][0] << setw(12) << resultados[1][1] << setw(12) << resultados[1][2] << endl;
+					cout << "Método de mergesort:  " << setw(12) << resultados[2][0] << setw(12) << resultados[2][1] << setw(12) << resultados[2][2] << endl;
+					suma=0;
 					break;
 				}
 
 				case 3:{
-					vector<float> cp_quicksort(num_rep);
-					vector<dni> vector_dni(tam_secuencia);
-					vector<vector<float>> resultados(6, vector<float>(3));
-					float suma = 0;
+
 					for (int j=0; j<num_rep; j++){
 						for (int k=0;k<vector_dni.size();k++)
 							vector_dni[k].set_random();
-						cp_quicksort[j] = quicksort<dni>(vector_dni,1);
-						suma += cp_quicksort[j];
+						comp[j] = quicksort<dni>(vector_dni,1);
+						suma += comp[j];
 
 					}
 					
-					quicksort<float>(cp_quicksort,1);
-					resultados[3][0] = cp_quicksort.front();
-					resultados[3][1] = (suma/cp_quicksort.size());
-					resultados[3][2] = cp_quicksort.back();
+					calcular_cp(comp, resultados, suma, 3);
 
 					cout << "Método de quicksort:  " << setw(12) << resultados[3][0] << setw(12) << resultados[3][1] << setw(12) << resultados[3][2] << endl;
+					suma=0;
 					break;
 				}
 
 				case 4:{
-					vector<float> cp_seleccion(num_rep);
-					vector<dni> vector_dni(tam_secuencia);
-					vector<vector<float>> resultados(6, vector<float>(3));
-					float suma = 0;
+
 					for (int j=0; j<num_rep; j++){
 						for (int k=0;k<vector_dni.size();k++)
 							vector_dni[k].set_random();
-						cp_seleccion[j] = seleccion<dni>(vector_dni,1);
-						suma += cp_seleccion[j];
+						comp[j] = seleccion<dni>(vector_dni,1);
+						suma += comp[j];
 					}
-					seleccion<float>(cp_seleccion,1);
-					resultados[4][0] = cp_seleccion.front();
-					resultados[4][1] = (suma/cp_seleccion.size());
-					resultados[4][2] = cp_seleccion.back();
+					
+					calcular_cp(comp, resultados, suma, 4);
 
 					cout << "Método de seleccion:  " << setw(12) << resultados[4][0] << setw(12) << resultados[4][1] << setw(12) << resultados[4][2] << endl;
+					suma=0;
+					break;
+				}
+
+				case 5:{
+
+					for (int j=0; j<num_rep; j++){
+						for (int k=0;k<vector_dni.size();k++)
+							vector_dni[k].set_random();
+						comp[j] = shellsort<dni>(vector_dni,1);
+						suma += comp[j];
+					}
+					
+					calcular_cp(comp, resultados, suma, 4);
+
+					cout << "Método de shellsort:  " << setw(12) << resultados[4][0] << setw(12) << resultados[4][1] << setw(12) << resultados[4][2] << endl;
+					suma=0;
 					break;
 				}
 			}

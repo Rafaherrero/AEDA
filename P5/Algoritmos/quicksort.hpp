@@ -97,6 +97,7 @@ unsigned long int quicksort(vector<tipo_vector> &v, unsigned modo){
         cout << endl << "Secuencia tras el ejecutar quicksort: " << endl;
         for (int i=0; i < v.size(); i++)
             cout << i+1 << ". " << v[i] << endl;
+        cout << endl << "=============================" << endl;
         cout << "LA SECUENCIA YA ESTA ORDENADA" << endl << endl;
     }
 

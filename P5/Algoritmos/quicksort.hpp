@@ -31,7 +31,7 @@ void quicksort(vector<tipo_vector> &v, int inicio, int final, unsigned long int 
         if (i < j) {
 
         	if(modo==0)
-        		cout << "Como el valor del centinela izquierda: " << i << " es menor o igual que el de la derecha: " << j << ", intercambiamos." << endl;
+        		cout << "Como el valor del centinela izquierda: " << i+1 << " es menor o igual que el de la derecha: " << j+1 << ", intercambiamos." << endl;
 
             tmp = v[i];
             v[i] = v[j];

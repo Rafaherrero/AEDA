@@ -19,7 +19,7 @@ void Mezcla(vector<tipo_vector> &v, int inicio, int cen, int fin, unsigned long 
 		else{ 
 
 			if(modo==0)
-				cout << "Como el valor de la posicion " << i+1 << ": " << v[i] << " es igual o mas grande que el de la posicion " << j+1 << ": " << v[j] << ", intercambiamos." << endl;
+				cout << "Como el valor de la posicion " << i+1 << ": " << v[i] << " es igual o mas grande que el de la posicion " << j+1 << ": " << v[j] << ", intercambiamos las posiciones " << k+1 << ": " << tp[k] << " con " << v[j] << endl;
 
 			tp[k] = v[j];
 			j++;

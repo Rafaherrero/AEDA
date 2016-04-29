@@ -56,7 +56,7 @@ int main (void){
 		while (!(alg_ejecutar>=0 && alg_ejecutar<=(cantidad_algoritmos-1))){ //alg_ejecutar != 0 && alg_ejecutar != 1 && alg_ejecutar != 2 && alg_ejecutar != 3 && alg_ejecutar != 4
 			write(1,"\033[H\033[2J",7);
 			cout << "============= " << "MODO DEMOSTRACIÓN" << " =============" << endl;
-			cout << "Introduzca el numero de pruebas a realizar: ";
+			cout << "Introduzca el tamaño de la secuencia: ";
 			cin >> ct_pruebas;
 			cout << "Seleccione el algoritmo que quiere probar: " << endl;
 			cout << "0. Algoritmo Burbuja" << endl;
@@ -140,7 +140,7 @@ int main (void){
 		vector<float> comp(num_rep);
 		float suma = 0;
 
-		for (int i=0; i<6; i++){
+		for (int i=0; i<cantidad_algoritmos; i++){
 			switch (i){
 				case 0:{
 					

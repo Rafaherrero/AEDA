@@ -14,5 +14,12 @@ int main(void){
 	nodo<dni> *D = C.get_raiz();
 	cout << B << endl;
 	cout << D -> dato() << endl;
+	arbol<dni> E;
+	if (C.empty())
+		cout << "El arbol esta vacio" << endl;
+	else
+		cout << "El metodo si funciona" << endl;
+
+	cout << C.size() << endl;
 	return 0;
 }

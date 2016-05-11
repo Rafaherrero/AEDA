@@ -10,6 +10,7 @@ public:
 	arbol(void);
 	arbol(nodo<tipo_dato>* nodo_raiz);
 	~arbol(void);
+	nodo<tipo_dato>* get_raiz(void);
 
 };
 
@@ -25,3 +26,8 @@ raiz_(nodo_raiz)
 
 template<class tipo_dato>
 arbol<tipo_dato>::~arbol(void){}
+
+template<class tipo_dato>
+nodo<tipo_dato>* arbol<tipo_dato>::get_raiz(void){
+	return raiz_;
+}

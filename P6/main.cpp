@@ -8,9 +8,11 @@
 using namespace std;
 
 int main(void){
-	dni B=34567821;
+	dni B(23568941);
 	nodo<dni> A(B);
-	arbol<dni> C(A);
-	cout << A.dato() << endl;
+	arbol<dni> C(&A);
+	nodo<dni> *D = C.get_raiz();
+	cout << B << endl;
+	cout << D -> dato() << endl;
 	return 0;
 }

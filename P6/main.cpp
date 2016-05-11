@@ -21,5 +21,23 @@ int main(void){
 		cout << "El metodo si funciona" << endl;
 
 	cout << C.size() << endl;
+	
+	C.insert(B);
+	dni G(63568941);
+	C.insert(G);
+
+	nodo<dni> *F = C.get_raiz();
+
+	cout << F -> dato()<< endl;
+	cout << F -> izquierda() -> dato() << endl;
+	cout << F -> derecha() -> dato() << endl;
+
+	C.pre_orden();
+	cout << endl;
+	C.in_orden();
+	cout << endl;
+	C.post_orden();
+	cout << endl;
+
 	return 0;
 }

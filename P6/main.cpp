@@ -22,15 +22,15 @@ int main(void){
 
 	cout << C.size() << endl;
 	
-	C.insert(B);
-	dni G(63568941);
-	C.insert(G);
+	dni H(13568941);
+	C.insertar(H);
+	dni G(13568940);
 
 	nodo<dni> *F = C.get_raiz();
 
-	cout << F -> dato()<< endl;
-	cout << F -> izquierda() -> dato() << endl;
-	cout << F -> derecha() -> dato() << endl;
+	//cout << F -> dato()<< endl;
+	//cout << F -> izquierda() -> dato() << endl;
+	//cout << F -> derecha() -> dato() << endl;
 
 	C.pre_orden();
 	cout << endl;

@@ -1,6 +1,7 @@
 #include "nodo.hpp"
 
 #pragma once
+using namespace std;
 
 template<class tipo_dato>
 class arbol{
@@ -15,8 +16,12 @@ public:
 	bool empty(nodo<tipo_dato>* nodo) const;
 	unsigned size(void) const;
 	unsigned size(nodo<tipo_dato>* nodo) const;
-	unsigned insert(tipo_dato elemento);
-	unsigned insert(nodo<tipo_dato>* nodo_, nodo<tipo_dato>*& raiz, unsigned ct_cp);
+
+	unsigned insertar(tipo_dato elemento);
+	unsigned insertar(nodo<tipo_dato>* nodo_, nodo<tipo_dato>*& raiz, unsigned ct_cp);
+	void eliminar(tipo_dato elemento);
+	void eliminar(tipo_dato elemento, nodo<tipo_dato>*& raiz);
+	void sustituir(nodo<tipo_dato>*& viejo, nodo<tipo_dato>*& cambio);
 
 	void imprimir_dato(nodo<tipo_dato>* nodo);
 	void pre_orden(void);
@@ -73,14 +78,14 @@ unsigned arbol<tipo_dato>::size(nodo<tipo_dato>* nodo) const
 }
 
 template<class tipo_dato>
-unsigned arbol<tipo_dato>::insert(tipo_dato elemento)
+unsigned arbol<tipo_dato>::insertar(tipo_dato elemento)
 {
     nodo<tipo_dato>* nodo_ = new nodo<tipo_dato>(elemento);
-    return insert(nodo_, raiz_, 0);
+    return insertar(nodo_, raiz_, 0);
 }
 
 template<class tipo_dato>
-unsigned arbol<tipo_dato>::insert(nodo<tipo_dato>* nodo_, nodo<tipo_dato>*& raiz, unsigned ct_cp)
+unsigned arbol<tipo_dato>::insertar(nodo<tipo_dato>* nodo_, nodo<tipo_dato>*& raiz, unsigned ct_cp)
 {
     ct_cp++;
 	if(raiz == nullptr){
@@ -88,18 +93,60 @@ unsigned arbol<tipo_dato>::insert(nodo<tipo_dato>* nodo_, nodo<tipo_dato>*& raiz
 		return ct_cp;
 	}
 	if(nodo_->dato() <= raiz->dato())
-		ct_cp = insert(nodo_, raiz->izquierda(), ct_cp);
+		ct_cp = insertar(nodo_, raiz->izquierda(), ct_cp);
 	else
-		ct_cp = insert(nodo_, raiz->derecha(), ct_cp);
+		ct_cp = insertar(nodo_, raiz->derecha(), ct_cp);
 	
 	return ct_cp;
+}
+
+template<class tipo_dato>
+void arbol<tipo_dato>::eliminar(tipo_dato elemento)
+{
+    eliminar(elemento, raiz_);
+}
+
+template<class tipo_dato>
+void arbol<tipo_dato>::eliminar(tipo_dato elemento, nodo<tipo_dato>*& raiz)
+{
+    if(raiz == nullptr)
+        return;
+
+    if(elemento < raiz->dato())
+        eliminar(elemento, raiz->izquierda());
+    else if(elemento > raiz->dato())
+        eliminar(elemento, raiz->derecha());
+    else{
+        nodo<tipo_dato>*& viejo = raiz;
+
+        if(raiz->derecha() == nullptr)
+            raiz = raiz->izquierda();
+        else if(raiz->izquierda() == nullptr)
+            raiz = raiz->derecha();
+        else
+            sustituir(viejo, raiz->izquierda());
+
+        delete viejo;
+    }
+}
+
+template<class tipo_dato>
+void arbol<tipo_dato>::sustituir(nodo<tipo_dato>*& viejo, nodo<tipo_dato>*& cambio)
+{
+    if(cambio->derecha() != nullptr)
+        sustituir(viejo, cambio->derecha());
+    else{
+        viejo->dato() = cambio->dato();
+        viejo = cambio;
+        cambio = cambio->izquierda();
+    }
 }
 
 template<class tipo_dato>
 void arbol<tipo_dato>::imprimir_dato(nodo<tipo_dato>* nodo)
 {
     if(nodo == nullptr){
-        cout << "--";
+        cout << "[.]";
         return;
     }
 	cout << nodo->dato() << " ";

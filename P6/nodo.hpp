@@ -1,7 +1,9 @@
-#include "common.h"
+#include "common.hpp"
+
+#pragma once
 
 template<class tipo_dato>
-class node{
+class nodo{
 private:
 	tipo_dato dato_;
 	nodo* izquierda_;
@@ -24,7 +26,7 @@ derecha_(nullptr)
 
 template<class tipo_dato>
 nodo<tipo_dato>::nodo(tipo_dato dato):
-dato_(data),
+dato_(dato),
 izquierda_(nullptr),
 derecha_(nullptr)
 {}

@@ -8,7 +8,7 @@
 using namespace std;
 
 int main(void){
-	dni B(23568941);
+	dni B(23568930);
 	nodo<dni> A(B);
 	arbol<dni> C(&A);
 	nodo<dni> *D = C.get_raiz();
@@ -22,9 +22,12 @@ int main(void){
 
 	cout << C.size() << endl;
 	
-	dni H(13568941);
+	dni H(23568925);
 	C.insertar(H);
-	dni G(13568940);
+	dni G(23568915);
+	C.insertar(G);
+	dni I(23568940);
+	C.insertar(I);
 
 	nodo<dni> *F = C.get_raiz();
 

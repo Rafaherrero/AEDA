@@ -13,6 +13,8 @@ public:
 	nodo(tipo_dato dato);
 	~nodo(void);
 	nodo*& izquierda(void);
+	nodo* izquierda(void) const;
+	nodo* derecha(void) const;
 	nodo*& derecha(void);
 	tipo_dato& dato(void);
 };
@@ -41,6 +43,16 @@ nodo<tipo_dato>*& nodo<tipo_dato>::derecha(void){
 
 template<class tipo_dato>
 nodo<tipo_dato>*& nodo<tipo_dato>::izquierda(void){
+	return izquierda_;
+}
+
+template<class tipo_dato>
+nodo<tipo_dato>* nodo<tipo_dato>::derecha(void) const{
+	return derecha_;
+}
+
+template<class tipo_dato>
+nodo<tipo_dato>* nodo<tipo_dato>::izquierda(void) const{
 	return izquierda_;
 }
 

@@ -150,7 +150,7 @@ void arbol<tipo_dato>::eliminar(tipo_dato elemento, nodo<tipo_dato>*& raiz){
     else if(elemento > raiz->dato())
         eliminar(elemento, raiz->derecha());
     else{
-        nodo<tipo_dato>*& viejo = raiz;
+        nodo<tipo_dato>* viejo = raiz;
 
         if(raiz->derecha() == nullptr)
             raiz = raiz->izquierda();

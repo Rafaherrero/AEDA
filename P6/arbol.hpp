@@ -27,10 +27,11 @@ public:
 	void pre_orden(void);
 	void post_orden(void);
 	void in_orden(void);
+	void nivel_orden(void);
 	void pre_orden(nodo<tipo_dato>* raiz);
 	void post_orden(nodo<tipo_dato>* raiz);
 	void in_orden(nodo<tipo_dato>* raiz);
-
+	void nivel_orden(nodo<tipo_dato>* raiz);
 };
 
 template<class tipo_dato>
@@ -52,41 +53,35 @@ nodo<tipo_dato>* arbol<tipo_dato>::get_raiz(void){
 }
 
 template<class tipo_dato>
-bool arbol<tipo_dato>::empty(void) const
-{
+bool arbol<tipo_dato>::empty(void) const{
     return empty(raiz_);
 }
 
 template<class tipo_dato>
-bool arbol<tipo_dato>::empty(nodo<tipo_dato>* nodo) const
-{
+bool arbol<tipo_dato>::empty(nodo<tipo_dato>* nodo) const{
     return nodo == nullptr;
 }
 
 template<class tipo_dato>
-unsigned arbol<tipo_dato>::size(void) const
-{
+unsigned arbol<tipo_dato>::size(void) const{
     return size(raiz_);
 }
 
 template<class tipo_dato>
-unsigned arbol<tipo_dato>::size(nodo<tipo_dato>* nodo) const
-{
+unsigned arbol<tipo_dato>::size(nodo<tipo_dato>* nodo) const{
     if(empty(nodo))
         return 0;
     return(1 + size(nodo->izquierda()) + size(nodo->derecha()));
 }
 
 template<class tipo_dato>
-unsigned arbol<tipo_dato>::insertar(tipo_dato elemento)
-{
+unsigned arbol<tipo_dato>::insertar(tipo_dato elemento){
     nodo<tipo_dato>* nodo_ = new nodo<tipo_dato>(elemento);
     return insertar(nodo_, raiz_, 0);
 }
 
 template<class tipo_dato>
-unsigned arbol<tipo_dato>::insertar(nodo<tipo_dato>* nodo_, nodo<tipo_dato>*& raiz, unsigned ct_cp)
-{
+unsigned arbol<tipo_dato>::insertar(nodo<tipo_dato>* nodo_, nodo<tipo_dato>*& raiz, unsigned ct_cp){
     ct_cp++;
 	if(raiz == nullptr){
 		raiz = nodo_;
@@ -101,14 +96,12 @@ unsigned arbol<tipo_dato>::insertar(nodo<tipo_dato>* nodo_, nodo<tipo_dato>*& ra
 }
 
 template<class tipo_dato>
-void arbol<tipo_dato>::eliminar(tipo_dato elemento)
-{
+void arbol<tipo_dato>::eliminar(tipo_dato elemento){
     eliminar(elemento, raiz_);
 }
 
 template<class tipo_dato>
-void arbol<tipo_dato>::eliminar(tipo_dato elemento, nodo<tipo_dato>*& raiz)
-{
+void arbol<tipo_dato>::eliminar(tipo_dato elemento, nodo<tipo_dato>*& raiz){
     if(raiz == nullptr)
         return;
 
@@ -131,8 +124,7 @@ void arbol<tipo_dato>::eliminar(tipo_dato elemento, nodo<tipo_dato>*& raiz)
 }
 
 template<class tipo_dato>
-void arbol<tipo_dato>::sustituir(nodo<tipo_dato>*& viejo, nodo<tipo_dato>*& cambio)
-{
+void arbol<tipo_dato>::sustituir(nodo<tipo_dato>*& viejo, nodo<tipo_dato>*& cambio){
     if(cambio->derecha() != nullptr)
         sustituir(viejo, cambio->derecha());
     else{
@@ -143,8 +135,7 @@ void arbol<tipo_dato>::sustituir(nodo<tipo_dato>*& viejo, nodo<tipo_dato>*& camb
 }
 
 template<class tipo_dato>
-void arbol<tipo_dato>::imprimir_dato(nodo<tipo_dato>* nodo)
-{
+void arbol<tipo_dato>::imprimir_dato(nodo<tipo_dato>* nodo){
     if(nodo == nullptr){
         cout << "[.]";
         return;
@@ -153,25 +144,27 @@ void arbol<tipo_dato>::imprimir_dato(nodo<tipo_dato>* nodo)
 }
 
 template<class tipo_dato>
-void arbol<tipo_dato>::pre_orden(void)
-{
+void arbol<tipo_dato>::pre_orden(void){
     pre_orden(raiz_);
 }
 
 template<class tipo_dato>
-void arbol<tipo_dato>::post_orden(void)
-{
+void arbol<tipo_dato>::post_orden(void){
     post_orden(raiz_);
 }
 
 template<class tipo_dato>
-void arbol<tipo_dato>::in_orden(void)
-{
+void arbol<tipo_dato>::in_orden(void){
     in_orden(raiz_);
 }
+
 template<class tipo_dato>
-void arbol<tipo_dato>::pre_orden(nodo<tipo_dato>* raiz)
-{
+void arbol<tipo_dato>::nivel_orden(void){
+	nivel_orden(raiz_);
+}
+
+template<class tipo_dato>
+void arbol<tipo_dato>::pre_orden(nodo<tipo_dato>* raiz){
     if(raiz == nullptr)
         return;
     imprimir_dato(raiz);
@@ -180,8 +173,7 @@ void arbol<tipo_dato>::pre_orden(nodo<tipo_dato>* raiz)
 }
 
 template<class tipo_dato>
-void arbol<tipo_dato>::post_orden(nodo<tipo_dato>* raiz)
-{
+void arbol<tipo_dato>::post_orden(nodo<tipo_dato>* raiz){
     if(raiz == nullptr)
         return;
     post_orden(raiz->izquierda());
@@ -190,11 +182,39 @@ void arbol<tipo_dato>::post_orden(nodo<tipo_dato>* raiz)
 }
 
 template<class tipo_dato>
-void arbol<tipo_dato>::in_orden(nodo<tipo_dato>* raiz)
-{
+void arbol<tipo_dato>::in_orden(nodo<tipo_dato>* raiz){
     if(raiz == nullptr)
         return;
     in_orden(raiz->izquierda());
     imprimir_dato(raiz);
     in_orden(raiz->derecha());
+}
+
+template<class tipo_dato>
+void arbol<tipo_dato>::nivel_orden(nodo<tipo_dato>* raiz){
+	deque<pair<nodo<tipo_dato>*, unsigned>> cola;
+	nodo<tipo_dato>* copia_nodo;
+	unsigned nivel = 0, nivel_actual = 0;
+
+	cola.push_back(pair<nodo<tipo_dato>*, unsigned>(raiz,0));
+
+	while(!cola.empty()){
+		copia_nodo = get<0>(cola.front());
+        nivel = get<1>(cola.front());
+		cola.pop_front();
+		if(nivel > nivel_actual){
+			nivel_actual = nivel;
+			cout << endl;
+		}
+
+		if (copia_nodo != nullptr){
+			imprimir_dato(copia_nodo);
+			cola.push_back(pair<nodo<tipo_dato>*, unsigned>(copia_nodo -> izquierda(), nivel+1));
+			cola.push_back(pair<nodo<tipo_dato>*, unsigned>(copia_nodo -> derecha(), nivel+1));
+		}
+		else{
+			imprimir_dato(nullptr);
+		}
+
+	}
 }

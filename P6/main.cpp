@@ -39,5 +39,8 @@ int main(void){
 	C.post_orden();
 	cout << endl;
 
+	C.nivel_orden();
+	cout << endl;
+
 	return 0;
 }

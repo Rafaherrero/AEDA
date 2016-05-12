@@ -7,6 +7,7 @@ template<class tipo_dato>
 class arbol{
 private:
 	nodo<tipo_dato>* raiz_;
+	unsigned cp_esta;
 public:
 	arbol(void);
 	arbol(nodo<tipo_dato>* nodo_raiz);
@@ -39,16 +40,20 @@ public:
 	void post_orden(nodo<tipo_dato>* raiz);
 	void in_orden(nodo<tipo_dato>* raiz);
 	void nivel_orden(nodo<tipo_dato>* raiz);
+
+	unsigned get_esta(void);
 };
 
 template<class tipo_dato>
 arbol<tipo_dato>::arbol (void):
-raiz_(nullptr)
+raiz_(nullptr),
+cp_esta(0)
 {}
 
 template<class tipo_dato>
 arbol<tipo_dato>::arbol (nodo<tipo_dato>* nodo_raiz):
-raiz_(nodo_raiz)
+raiz_(nodo_raiz),
+cp_esta(0)
 {}
 
 template<class tipo_dato>
@@ -261,20 +266,32 @@ void arbol<tipo_dato>::nivel_orden(nodo<tipo_dato>* raiz){
 }
 
 template<class tipo_dato>
-nodo<tipo_dato>* arbol<tipo_dato>::buscar(tipo_dato elemento){ 
+nodo<tipo_dato>* arbol<tipo_dato>::buscar(tipo_dato elemento){
+	cp_esta = 0; 
 	return buscar(raiz_, elemento);
 }
 
 template<class tipo_dato>
 nodo<tipo_dato>* arbol<tipo_dato>::buscar(nodo<tipo_dato>* nodo, tipo_dato elemento){
 
-	if (nodo == nullptr)
+	if (nodo == nullptr){
+		cp_esta ++;
 		return nullptr;
+	}
 
-	if (elemento == nodo->dato())
+	if (elemento == nodo->dato()){
+		cp_esta ++;
 		return nodo;
+	}
 
-	if (elemento < nodo->dato())
-		return BuscarRama(nodo->izquierda(), elemento);
-	return BuscarRama(nodo->derecha(), elemento);
+	if (elemento < nodo->dato()){
+		cp_esta ++;
+		return buscar(nodo->izquierda(), elemento);
+	}
+	return buscar(nodo->derecha(), elemento);
+}
+
+template<class tipo_dato>
+unsigned arbol<tipo_dato>::get_esta(void){
+	return cp_esta;
 }

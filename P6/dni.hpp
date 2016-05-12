@@ -18,5 +18,6 @@ public:
 	bool operator>(dni& dni_cp);
 	bool operator<=(dni& dni_cp);
 	bool operator>=(dni& dni_cp);
+	bool operator==(dni& dni_cp);
 	friend ostream& operator<<(ostream& os, const dni& dni_salida);
 };

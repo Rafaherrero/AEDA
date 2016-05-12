@@ -49,6 +49,10 @@ bool dni::operator>=(dni& dni_cp){
 	return dni_ >= dni_cp.get_dni();
 }
 
+bool dni::operator==(dni& dni_cp){
+	return dni_ == dni_cp.get_dni();
+}
+
 ostream& operator<<(ostream& os, const dni& dni_salida)
 {
     os << dni_salida.dni_;

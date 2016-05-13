@@ -26,7 +26,7 @@ void calcular_cp(vector<float> &com, vector<vector<float>> &v, float sm, unsigne
 	insercion<float>(com,1);
 
 	v[modo_][0] = com.front();
-	v[modo_][1] = (sm/com.size());
+	v[modo_][1] = ((com.front()+com.back())/2);
 	v[modo_][2] = com.back();
 }
 
@@ -122,7 +122,7 @@ else if (opc==1){
 
 		vector<dni> vector_dni(tam_arbol);
 		vector<vector<float>> resultados(2, vector<float>(3));
-		vector<float> comp(num_rep);
+		vector<float> comp(vector_dni.size());
 		float suma = 0, suma_intermedio =0;
 
 		for (int j=0; j<num_rep; j++){
@@ -130,11 +130,8 @@ else if (opc==1){
 			for (int k=0;k<vector_dni.size();k++)
 				vector_dni[k].set_random();
 			for (int k=0;k<vector_dni.size();k++){
-				suma_intermedio += arbol_esta.insertar(vector_dni[k]);
+				comp[k] = arbol_esta.insertar(vector_dni[k]);
 			}
-			comp[j] = suma_intermedio;
-			suma += comp[j];
-			suma_intermedio=0;
 		}
 	
 		calcular_cp(comp, resultados, suma, 0);
@@ -143,7 +140,7 @@ else if (opc==1){
 		suma=0;
 
 		vector<dni> vector_dni_2(tam_arbol*2);
-		vector<float> comp_2(num_rep);
+		vector<float> comp_2(vector_dni_2.size());
 
 		for (int j=0; j<num_rep; j++){
 			for (int k=0;k<vector_dni_2.size();k++)
@@ -154,15 +151,12 @@ else if (opc==1){
 			}
 			for (int k=0;k<vector_dni_2.size()/2;k++){
 				arbol_esta.buscar(vector_dni_2[k]);
-				suma_intermedio += arbol_esta.get_esta();
+				 comp_2[k] = arbol_esta.get_esta();
 			}
 			for (int k=vector_dni_2.size()/2; k<vector_dni_2.size(); k++){
 				arbol_esta.buscar(vector_dni_2[k]);
-				suma_intermedio += arbol_esta.get_esta();
+				comp_2[k] += arbol_esta.get_esta();
 			}
-			comp_2[j] = suma_intermedio;
-			suma += comp_2[j];
-			suma_intermedio=0;
 		}
 
 		calcular_cp(comp_2, resultados, suma, 0);

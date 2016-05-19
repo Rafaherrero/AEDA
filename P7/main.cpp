@@ -4,7 +4,7 @@
 #include "dni.hpp"
 #include "nodo.hpp"
 #include "insercion.hpp"
-#include "arbol.hpp"
+#include "avl.hpp"
 
 using namespace std;
 

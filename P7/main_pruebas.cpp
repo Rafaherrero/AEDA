@@ -8,5 +8,5 @@
 using namespace std;
 
 int main(void){
-	
+	avl<dni> A;
 }

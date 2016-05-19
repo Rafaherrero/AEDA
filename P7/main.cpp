@@ -129,7 +129,11 @@ else if (opc==1){
 			for (int k=0;k<vector_dni.size();k++)
 				vector_dni[k].set_random();
 			for (int k=0;k<vector_dni.size();k++){
-				comp[k] = arbol_esta.insertar(vector_dni[k]);
+				arbol_esta.insertar(vector_dni[k]);
+			}
+			for (int k=0;k<vector_dni.size();k++){
+				arbol_esta.buscar(vector_dni[k]);
+				comp[k] = arbol_esta.get_esta();
 			}
 		}
 	

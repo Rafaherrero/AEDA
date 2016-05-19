@@ -108,9 +108,6 @@ unsigned opc=3, tam_arbol, num_rep;
 	}
 	}while(opc_demo != 3);
 }
-
-}
-/*
 else if (opc==1){
 		
 		write(1,"\033[H\033[2J",7);
@@ -128,7 +125,7 @@ else if (opc==1){
 		float suma = 0, suma_intermedio =0;
 
 		for (int j=0; j<num_rep; j++){
-			arbol<dni> arbol_esta;
+			avl<dni> arbol_esta;
 			for (int k=0;k<vector_dni.size();k++)
 				vector_dni[k].set_random();
 			for (int k=0;k<vector_dni.size();k++){
@@ -147,7 +144,7 @@ else if (opc==1){
 		for (int j=0; j<num_rep; j++){
 			for (int k=0;k<vector_dni_2.size();k++)
 				vector_dni_2[k].set_random();
-			arbol<dni> arbol_esta;
+			avl<dni> arbol_esta;
 			for (int k=0;k<vector_dni_2.size()/2;k++){
 				arbol_esta.insertar(vector_dni_2[k]);
 			}
@@ -173,4 +170,6 @@ else{
 }
 
 return 0;
-}*/
+}
+/*
+*/

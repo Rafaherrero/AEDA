@@ -8,10 +8,6 @@
 
 using namespace std;
 
-int main(void){
-
-}
-/*
 unsigned opc_demo=4;
 
 void borrar_pantalla (void){
@@ -39,10 +35,9 @@ void randomizar(vector<dni> &v){
 		v[i].set_random();
 }
 
-
-
 int main(void){
-	unsigned opc=3, tam_arbol, num_rep;
+
+unsigned opc=3, tam_arbol, num_rep;
 
 	while (opc != 0 && opc != 1 && opc != 2){
 		cout << "================ " << "ARBOL BINARIO DE BUSQUEDA" << " =================" << endl;
@@ -57,7 +52,7 @@ int main(void){
 	}
 
 	if (opc==0){
-		arbol<int> arbol_demo;
+		avl<int> arbol_demo;
 		do{
 		while (opc_demo != 0 && opc_demo != 1 && opc_demo != 2 && opc_demo !=3){
 			borrar_pantalla();
@@ -113,6 +108,9 @@ int main(void){
 	}
 	}while(opc_demo != 3);
 }
+
+}
+/*
 else if (opc==1){
 		
 		write(1,"\033[H\033[2J",7);

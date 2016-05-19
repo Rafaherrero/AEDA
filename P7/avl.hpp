@@ -23,32 +23,32 @@ public:
 	unsigned height(nodo<tipo_dato>* nodo) const;
 	bool leaf(nodo<tipo_dato>* nodo);
 
-	unsigned insertar(tipo_dato elemento);
-	unsigned insertar(nodo<tipo_dato>* nodo_, nodo<tipo_dato>*& raiz, unsigned ct_cp);
-	void eliminar(tipo_dato elemento);
-	void eliminar(tipo_dato elemento, nodo<tipo_dato>*& raiz);
-	void sustituir(nodo<tipo_dato>*& viejo, nodo<tipo_dato>*& cambio);
-	nodo<tipo_dato>* buscar(tipo_dato elemento);
-	nodo<tipo_dato>* buscar(nodo<tipo_dato>* nodo, tipo_dato elemento);
+	void sustituir(nodo<tipo_dato>*& viejo, nodo<tipo_dato>*& cambio, bool &decrece);
 
 	void imprimir_dato(nodo<tipo_dato>* nodo);
-	void pre_orden(void);
-	void post_orden(void);
-	void in_orden(void);
 	void nivel_orden(void);
-	void pre_orden(nodo<tipo_dato>* raiz);
-	void post_orden(nodo<tipo_dato>* raiz);
-	void in_orden(nodo<tipo_dato>* raiz);
 	void nivel_orden(nodo<tipo_dato>* raiz);
+	nodo<tipo_dato>* buscar(tipo_dato elemento);
+	nodo<tipo_dato>* buscar(nodo<tipo_dato>* nodo, tipo_dato elemento);
 
 	unsigned get_esta(void);
 
 	bool balanceado(void);
-	bool balanceado(nodo<tipo_dato>* nodo);
-	void rotacion_II(nodo<tipo_dato>*& nodo);
-	void rotacion_DD(nodo<tipo_dato>*& nodo);
-	void rotacion_ID(nodo<tipo_dato>*& nodo);
-	void rotacion_DI(nodo<tipo_dato>*& nodo);
+	bool balanceado(nodo<tipo_dato>* nodo_pasado);
+	void rotacion_II(nodo<tipo_dato>*& nodo_pasado);
+	void rotacion_DD(nodo<tipo_dato>*& nodo_pasado);
+	void rotacion_ID(nodo<tipo_dato>*& nodo_pasado);
+	void rotacion_DI(nodo<tipo_dato>*& nodo_pasado);
+
+	void insertar(tipo_dato elemento);
+	void insertar_bal(nodo<tipo_dato>* &nodo_pasado, nodo<tipo_dato>* nuevo, bool& crece);
+	void insertar_rebalancea_izquierda(nodo<tipo_dato>* &nodo_pasado, bool &crece);
+	void insertar_rebalancea_derecha(nodo<tipo_dato>* &nodo_pasado, bool &crece);
+	void eliminar(tipo_dato elemento);
+	void eliminar_rama(nodo<tipo_dato>* &nodo_pasado, tipo_dato elemento, bool &decrece);
+	void eliminar_rebalancea_izquierda(nodo<tipo_dato>* &nodo_pasado, bool &decrece);
+	void eliminar_rebalancea_derecha(nodo<tipo_dato>* &nodo_pasado, bool &decrece);
+	void sustituye(nodo<tipo_dato>* &eliminado, nodo<tipo_dato>* &sust, bool &decrece);
 };
 
 template<class tipo_dato>
@@ -127,66 +127,6 @@ bool avl<tipo_dato>::leaf(nodo<tipo_dato>* nodo){
 }
 
 template<class tipo_dato>
-unsigned avl<tipo_dato>::insertar(tipo_dato elemento){
-    nodo<tipo_dato>* nodo_ = new nodo<tipo_dato>(elemento);
-    return insertar(nodo_, raiz_, 0);
-}
-
-template<class tipo_dato>
-unsigned avl<tipo_dato>::insertar(nodo<tipo_dato>* nodo_, nodo<tipo_dato>*& raiz, unsigned ct_cp){
-    ct_cp++;
-	if(raiz == nullptr){
-		raiz = nodo_;
-		return ct_cp;
-	}
-	if(nodo_->dato() <= raiz->dato())
-		ct_cp = insertar(nodo_, raiz->izquierda(), ct_cp);
-	else
-		ct_cp = insertar(nodo_, raiz->derecha(), ct_cp);
-	
-	return ct_cp;
-}
-
-template<class tipo_dato>
-void avl<tipo_dato>::eliminar(tipo_dato elemento){
-    eliminar(elemento, raiz_);
-}
-
-template<class tipo_dato>
-void avl<tipo_dato>::eliminar(tipo_dato elemento, nodo<tipo_dato>*& raiz){
-    if(raiz == nullptr)
-        return;
-
-    if(elemento < raiz->dato())
-        eliminar(elemento, raiz->izquierda());
-    else if(elemento > raiz->dato())
-        eliminar(elemento, raiz->derecha());
-    else{
-        nodo<tipo_dato>* viejo = raiz;
-
-        if(raiz->derecha() == nullptr)
-            raiz = raiz->izquierda();
-        else if(raiz->izquierda() == nullptr)
-            raiz = raiz->derecha();
-        else
-            sustituir(viejo, raiz->izquierda());
-
-        delete viejo;
-    }
-}
-
-template<class tipo_dato>
-void avl<tipo_dato>::sustituir(nodo<tipo_dato>*& viejo, nodo<tipo_dato>*& cambio){
-    if(cambio->derecha() != nullptr)
-        sustituir(viejo, cambio->derecha());
-    else{
-        viejo->dato() = cambio->dato();
-        viejo = cambio;
-        cambio = cambio->izquierda();
-    }
-}
-
-template<class tipo_dato>
 void avl<tipo_dato>::imprimir_dato(nodo<tipo_dato>* nodo){
     if(nodo == nullptr){
         cout << "[.]";
@@ -196,50 +136,8 @@ void avl<tipo_dato>::imprimir_dato(nodo<tipo_dato>* nodo){
 }
 
 template<class tipo_dato>
-void avl<tipo_dato>::pre_orden(void){
-    pre_orden(raiz_);
-}
-
-template<class tipo_dato>
-void avl<tipo_dato>::post_orden(void){
-    post_orden(raiz_);
-}
-
-template<class tipo_dato>
-void avl<tipo_dato>::in_orden(void){
-    in_orden(raiz_);
-}
-
-template<class tipo_dato>
 void avl<tipo_dato>::nivel_orden(void){
 	nivel_orden(raiz_);
-}
-
-template<class tipo_dato>
-void avl<tipo_dato>::pre_orden(nodo<tipo_dato>* raiz){
-    if(raiz == nullptr)
-        return;
-    imprimir_dato(raiz);
-    pre_orden(raiz->izquierda());
-    pre_orden(raiz->derecha());
-}
-
-template<class tipo_dato>
-void avl<tipo_dato>::post_orden(nodo<tipo_dato>* raiz){
-    if(raiz == nullptr)
-        return;
-    post_orden(raiz->izquierda());
-    post_orden(raiz->derecha());
-    imprimir_dato(raiz);
-}
-
-template<class tipo_dato>
-void avl<tipo_dato>::in_orden(nodo<tipo_dato>* raiz){
-    if(raiz == nullptr)
-        return;
-    in_orden(raiz->izquierda());
-    imprimir_dato(raiz);
-    in_orden(raiz->derecha());
 }
 
 template<class tipo_dato>
@@ -326,7 +224,7 @@ bool avl<tipo_dato>::balanceado(nodo<tipo_dato>* nodo){
 template<class tipo_dato>
 void avl<tipo_dato>::rotacion_II(nodo<tipo_dato>*& nodo_pasado){
 	
-	nodo<tipo_dato> nodo_copia = nodo_pasado->izquierda();
+	nodo<tipo_dato>* nodo_copia = nodo_pasado->izquierda();
 	nodo_pasado->izquierda() = nodo_copia->derecha();
 	nodo_copia->derecha() = nodo_pasado;
 
@@ -343,7 +241,7 @@ void avl<tipo_dato>::rotacion_II(nodo<tipo_dato>*& nodo_pasado){
 
 template<class tipo_dato>
 void avl<tipo_dato>::rotacion_DD(nodo<tipo_dato>*& nodo_pasado){
-	nodo<tipo_dato> nodo_copia = nodo_pasado->derecha();
+	nodo<tipo_dato>* nodo_copia = nodo_pasado->derecha();
 	nodo_pasado->derecha() = nodo_copia->izquierda();
 	nodo_copia->izquierda() = nodo_pasado;
 
@@ -360,8 +258,8 @@ void avl<tipo_dato>::rotacion_DD(nodo<tipo_dato>*& nodo_pasado){
 
 template<class tipo_dato>
 void avl<tipo_dato>::rotacion_ID(nodo<tipo_dato>*& nodo_pasado){
-	nodo<tipo_dato> nodo_copia = nodo_pasado->izquierda();
-	nodo<tipo_dato> nodo_copia_2 = nodo_copia->derecha();
+	nodo<tipo_dato>* nodo_copia = nodo_pasado->izquierda();
+	nodo<tipo_dato>* nodo_copia_2 = nodo_copia->derecha();
 	nodo_pasado->izquierda() = nodo_copia_2->derecha();
 	nodo_copia_2->derecha() = nodo_pasado;
 	nodo_copia->derecha() = nodo_copia_2->izquierda();
@@ -383,8 +281,8 @@ void avl<tipo_dato>::rotacion_ID(nodo<tipo_dato>*& nodo_pasado){
 
 template<class tipo_dato>
 void avl<tipo_dato>::rotacion_DI(nodo<tipo_dato>*& nodo_pasado){
-	nodo<tipo_dato> nodo_copia = nodo_pasado->derecha();
-	nodo<tipo_dato> nodo_copia_2 = nodo_copia->izquierda();
+	nodo<tipo_dato>* nodo_copia = nodo_pasado->derecha();
+	nodo<tipo_dato>* nodo_copia_2 = nodo_copia->izquierda();
 	nodo_pasado->derecha() = nodo_copia_2->izquierda();
 	nodo_copia_2->izquierda() = nodo_pasado;
 	nodo_copia->izquierda() = nodo_copia_2->derecha();
@@ -402,4 +300,182 @@ void avl<tipo_dato>::rotacion_DI(nodo<tipo_dato>*& nodo_pasado){
 
 	nodo_copia_2->bal() = 0;
 	nodo_pasado = nodo_copia_2;
+}
+
+template <class tipo_dato>
+void avl<tipo_dato>::insertar_bal(nodo<tipo_dato>* &nodo_pasado, nodo<tipo_dato>* nuevo, bool& crece){
+	if (nodo_pasado == NULL){
+		nodo_pasado = nuevo;
+		crece = true;
+	}
+	else if (nuevo->dato() < nodo_pasado->dato()) {
+		insertar_bal(nodo_pasado->izquierda(), nuevo, crece);
+		if (crece) 
+			insertar_rebalancea_izquierda(nodo_pasado, crece);
+	}
+	else {
+		insertar_bal(nodo_pasado->derecha(), nuevo, crece);
+		if (crece) 
+			insertar_rebalancea_derecha(nodo_pasado, crece);
+	}
+}
+
+template <class tipo_dato>
+void avl<tipo_dato>::insertar_rebalancea_izquierda(nodo<tipo_dato>* &nodo_pasado, bool &crece){
+	switch (nodo_pasado->bal()){
+		case -1:	
+			nodo_pasado->bal() = 0;
+			crece = false;
+			break;
+
+		case 0:		
+			nodo_pasado->bal() = 1;
+			break;
+
+		case 1:		
+			nodo<tipo_dato>* nodo_copia = nodo_pasado->izquierda();
+			if (nodo_copia->bal() == 1)
+				rotacion_II(nodo_pasado);
+			else 
+				rotacion_ID(nodo_pasado);
+			crece = false;
+			break;
+	}
+}
+
+template <class tipo_dato>
+void avl<tipo_dato>::insertar_rebalancea_derecha(nodo<tipo_dato>* &nodo_pasado, bool &crece){
+	switch (nodo_pasado->bal()){
+		case 1:		
+			nodo_pasado->bal() = 0;
+			crece = false;
+			break;
+
+		case 0:		
+			nodo_pasado->bal() = -1;
+			break;
+
+		case -1:	
+			nodo<tipo_dato>* nodo_copia = nodo_pasado->derecha();
+			if (nodo_copia->bal() == -1)
+				rotacion_DD(nodo_pasado);
+			else 
+				rotacion_DI(nodo_pasado);
+			crece = false;
+	}
+}
+
+template <class tipo_dato>
+void avl<tipo_dato>::eliminar_rama(nodo<tipo_dato>* &nodo_pasado, tipo_dato elemento, bool &decrece){
+	if (nodo_pasado == NULL) 
+		return;
+	if (elemento < nodo_pasado->dato()) {
+		eliminar_rama(nodo_pasado->izquierda(), elemento, decrece);
+		if (decrece)
+			eliminar_rebalancea_izquierda(nodo_pasado, decrece);
+	}
+	else if (elemento > nodo_pasado->dato()) {
+		eliminar_rama(nodo_pasado->derecha(), elemento, decrece);
+		if (decrece)
+			eliminar_rebalancea_derecha(nodo_pasado, decrece);
+	}
+	else {
+		nodo<tipo_dato>* eliminado = nodo_pasado;
+		if (nodo_pasado->izquierda() == NULL) {
+			nodo_pasado = nodo_pasado->derecha();
+			decrece = true;
+		}
+		else if (nodo_pasado->derecha() == NULL) {
+			nodo_pasado = nodo_pasado->izquierda();
+			decrece = true;
+		}
+		else {
+			sustituye(eliminado, nodo_pasado->izquierda(), decrece);
+			if (decrece)
+				eliminar_rebalancea_izquierda(nodo_pasado, decrece);
+		}
+		delete eliminado;
+	}
+}
+
+template <class tipo_dato>
+void avl<tipo_dato>::eliminar_rebalancea_izquierda(nodo<tipo_dato>* &nodo_pasado, bool &decrece){
+	switch (nodo_pasado->bal())	{
+		case -1:{	
+			nodo<tipo_dato>* nodo_copia = nodo_pasado->derecha();
+			if (nodo_copia->bal() > 0)
+				rotacion_DI(nodo_pasado);
+			else {
+				if (nodo_copia->bal() == 0)
+					decrece = false;
+					rotacion_DD(nodo_pasado);
+				}
+			break;
+		}
+
+		case 0:		
+			nodo_pasado->bal() = -1;
+			decrece = false;
+			break;
+
+		case 1:		
+			nodo_pasado->bal() = 0;
+			break;
+	}
+}
+
+template <class tipo_dato>
+void avl<tipo_dato>::eliminar_rebalancea_derecha(nodo<tipo_dato>* &nodo_pasado, bool &decrece){
+	switch (nodo_pasado->bal())	{
+		case 1:{	
+			nodo<tipo_dato>* nodo_copia = nodo_pasado->izquierda();
+			if (nodo_copia->bal() < 0)
+				rotacion_ID(nodo_pasado);
+			else {
+				if (nodo_copia->bal() == 0)
+					decrece = false;
+					rotacion_II(nodo_pasado);
+				}
+			break;
+		}
+
+		case 0:		
+			nodo_pasado->bal() = 1;
+			decrece = false;
+			break;
+
+		case -1:	
+			nodo_pasado->bal() = 0;
+			break;
+	}
+}
+
+template <class tipo_dato>
+void avl<tipo_dato>::sustituye(nodo<tipo_dato>* &eliminado, nodo<tipo_dato>* &sust, bool &decrece){
+	if (sust->derecha() != NULL) {
+		sustituye(eliminado, sust->derecha(), decrece);
+		if (decrece)
+			eliminar_rebalancea_derecha(sust, decrece);
+	}
+	else {
+		eliminado->dato() = sust->dato();
+		eliminado = sust;
+		sust = sust->izquierda();
+		decrece = true;
+	}
+}
+
+template <class tipo_dato>
+void avl<tipo_dato>::insertar(tipo_dato elemento)
+{
+	nodo<tipo_dato>* nuevo = new nodo<tipo_dato>(elemento);
+	bool crece = false;
+	insertar_bal(raiz_, nuevo, crece);
+}
+
+template <class tipo_dato>
+void avl<tipo_dato>::eliminar(tipo_dato elemento)
+{
+	bool decrece = false;
+	eliminar_rama(raiz_, elemento, decrece);
 }

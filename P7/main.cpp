@@ -22,7 +22,7 @@ void error(void){
 }
 
 void calcular_cp(vector<float> &com, vector<vector<float>> &v, float sm, unsigned int modo_){
-	
+
 	insercion<float>(com,1);
 
 	v[modo_][0] = com.front();
@@ -121,20 +121,18 @@ else if (opc==1){
 
 		vector<dni> vector_dni(tam_arbol);
 		vector<vector<float>> resultados(2, vector<float>(3));
-		vector<float> comp(vector_dni.size());
+		vector<float> comp(num_rep);
 		float suma = 0, suma_intermedio =0;
+		avl<dni> arbol_esta;
 
 		for (int j=0; j<num_rep; j++){
-			avl<dni> arbol_esta;
 			for (int k=0;k<vector_dni.size();k++)
 				vector_dni[k].set_random();
-			for (int k=0;k<vector_dni.size();k++){
+			for (int k=0;k<vector_dni.size()-1;k++){
 				arbol_esta.insertar(vector_dni[k]);
 			}
-			for (int k=0;k<vector_dni.size();k++){
-				arbol_esta.buscar(vector_dni[k]);
-				comp[k] = arbol_esta.get_esta();
-			}
+			arbol_esta.buscar(vector_dni[tam_arbol-1]);
+			comp[j] = arbol_esta.get_esta();
 		}
 	
 		calcular_cp(comp, resultados, suma, 0);
